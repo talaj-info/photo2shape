@@ -103,26 +103,26 @@ class Photo2ShapePlugin( object ):
     version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( mVersion ) )
     version.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( version )
-    lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin converts a directory full of\ngeotagged images to a point shapefile" ) ) )
+    lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin creates a point shapefile\nfrom a set ofgeotagged images" ) ) )
     lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "<b>Developers:</b>" ) ) )
     lines.addWidget( QLabel( "  Tim Sutton" ) )
     lines.addWidget( QLabel( "  Alexander Bruy" ) )
-    lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "<b>Homepage:</b>") ) )
+    #lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "<b>Homepage:</b>") ) )
 
-    overrideLocale = QSettings().value( "locale/overrideFlag", QVariant( False ) ).toBool()
-    if not overrideLocale:
-      localeFullName = QLocale.system().name()
-    else:
-      localeFullName = QSettings().value( "locale/userLocale", QVariant( "" ) ).toString()
+    #overrideLocale = QSettings().value( "locale/overrideFlag", QVariant( False ) ).toBool()
+    #if not overrideLocale:
+    #  localeFullName = QLocale.system().name()
+    #else:
+    #  localeFullName = QSettings().value( "locale/userLocale", QVariant( "" ) ).toString()
 
-    localeShortName = localeFullName[ 0:2 ]
-    if localeShortName in [ "ru", "uk" ]:
-      link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>" )
-    else:
-      link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape-eng.html\">http://gis-lab.info/qa/photo2shape-eng.html</a>" )
+    #localeShortName = localeFullName[ 0:2 ]
+    #if localeShortName in [ "ru", "uk" ]:
+    #  link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>" )
+    #else:
+    #  link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape-eng.html\">http://gis-lab.info/qa/photo2shape-eng.html</a>" )
     
-    link.setOpenExternalLinks( True )
-    lines.addWidget( link )
+    #link.setOpenExternalLinks( True )
+    #lines.addWidget( link )
     
     btnClose = QPushButton( QApplication.translate( "Photo2Shape", "Close" ) )
     lines.addWidget( btnClose )
