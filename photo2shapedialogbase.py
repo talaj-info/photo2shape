@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'photo2shapedialogbase.ui'
 #
-# Created: Tue Feb 23 19:47:47 2010
+# Created: Sat Feb 27 13:02:58 2010
 #      by: PyQt4 UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -51,7 +51,7 @@ class Ui_Photo2ShapeDialog(object):
         self.verticalLayout.addWidget(self.addToCanvasCheck)
         self.buttonBox = QtGui.QDialogButtonBox(Photo2ShapeDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 

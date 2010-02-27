@@ -97,7 +97,7 @@ class Photo2ShapePlugin( object ):
     dlgAbout = QDialog()
     dlgAbout.setWindowTitle( QApplication.translate( "Photo2Shape", "About Photo2Shape", "Window title" ) )
     lines = QVBoxLayout( dlgAbout )
-    title = QLabel( QApplication.translate( "Photo2Shape", "<b>Images to shape</b>" ) )
+    title = QLabel( QApplication.translate( "Photo2Shape", "<b>Photo2Shape</b>" ) )
     title.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( title )
     version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( mVersion ) )
