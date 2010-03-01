@@ -165,7 +165,7 @@ def getCoordinates( tags ):
   latSeconds = None
 
   # longitude direction will be either "E" or "W"
-  lonDirection = exifTags[ "GPS GPSLongitudeRef" ]
+  lonDirection = str( exifTags[ "GPS GPSLongitudeRef" ] )
   # EXIF returns degrees, minutes and seconds in list, so we need to split it
   longitude = str( exifTags[ "GPS GPSLongitude" ] )[ 1:-1 ].split( ", " )
   lonDegrees = longitude[ 0 ]
@@ -173,7 +173,7 @@ def getCoordinates( tags ):
   lonSeconds = longitude[ 2 ]
 
   # latitude direction will be either "N" or "S"
-  latDirection = exifTags[ "GPS GPSLatitudeRef" ]
+  latDirection = str( exifTags[ "GPS GPSLatitudeRef" ] )
   # EXIF returns degrees, minutes and seconds in list, so we need to split it
   latitude = str( exifTags[ "GPS GPSLatitude" ] )[ 1:-1 ].split( ", " )
   latDegrees = latitude[ 0 ]
@@ -266,7 +266,6 @@ class ImageProcessingThread( QThread ):
 
     featureId = 0
     for fileName in self.photos:
-      print "FILE", fileName
       path = QFileInfo( self.baseDir + "/" + fileName ).absoluteFilePath()
       photoFile = open( path, "rb" )
       exifTags = EXIF.process_file( photoFile )
