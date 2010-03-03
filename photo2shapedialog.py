@@ -230,7 +230,28 @@ def getCoordinates( tags ):
   return ( lon, lat )
 
 def getAltitude( tags ):
-  pass
+  exifTags = tags
+
+  # altitude 
+  altDirection = exifTags[ "GPS GPSAltitudeRef" ]
+  altitude = str( exifTags[ "GPS GPSAltitude" ] )
+
+  # get altitude value
+  regexp = re.compile( "^[0-9]*" )
+  altitudeFloat = float( regexp.search( str( altitude ) ).group() )
+
+  # divide the value by the divisor if neccessary
+  regexp = re.compile( "[0-9]*$" )
+  if altitude.find( "/" ) == -1:
+    myAltitude = altitudeFloat
+  else:
+    myAltitude = altitudeFloat / float( regexp.search( str( altitude ) ).group() )
+
+  # use negative sign as needed
+  if altDirection == 1:
+    myAltitude = 0 - myAltitude
+
+  return myAltitude
 
 def getDateTime( tags ):
   pass
@@ -262,7 +283,10 @@ class ImageProcessingThread( QThread ):
                     2:QgsField( "longitude", QVariant.Double ),
                     3:QgsField( "latitude", QVariant.Double ),
                     4:QgsField( "altitude", QVariant.Double ) }
-    shapeFileWriter = QgsVectorFileWriter( self.outputFileName, self.outputEncoding, shapeFields, QGis.WKBPoint, None )
+
+    crs = QgsCoordinateReferenceSystem( 4326 )
+
+    shapeFileWriter = QgsVectorFileWriter( self.outputFileName, self.outputEncoding, shapeFields, QGis.WKBPoint, crs )
 
     featureId = 0
     for fileName in self.photos:
@@ -278,6 +302,7 @@ class ImageProcessingThread( QThread ):
         continue
 
       ( lon, lat ) = getCoordinates( exifTags )
+      alt = getAltitude( exifTags )
 
       # if coordinates are empty, write message to log and skip this file
       #if lon == 0 and lat == 0:
@@ -294,6 +319,7 @@ class ImageProcessingThread( QThread ):
       feature.addAttribute( 1, fileName )
       feature.addAttribute( 2, QVariant( lon ) )
       feature.addAttribute( 3, QVariant( lat ) )
+      feature.addAttribute( 4, QVariant( alt ) )
       shapeFileWriter.addFeature( feature )
       featureId += 1
 
