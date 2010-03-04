@@ -257,7 +257,26 @@ def getDateTime( tags ):
   pass
 
 def getDirection( tags ):
-  pass
+  exifTags = tags
+
+  if not exifTags.has_key( "GPS GPSImgDirection" ):
+    return None
+
+  dirAzimuth = str( exifTags[ "GPS GPSImgDirectionRef" ] )
+  direction = str( exifTags[ "GPS GPSImgDirection" ] )
+
+  # get direction value
+  regexp = re.compile( "^[0-9]*" )
+  directionFloat = float( regexp.search( str( direction ) ).group() )
+
+  # divide the value by the divisor if neccessary
+  regexp = re.compile( "[0-9]*$" )
+  if direction.find( "/" ) == -1:
+    myDirection = directionFloat
+  else:
+    myDirection = directionFloat / float( regexp.search( str( direction ) ).group() )
+
+  return myDirection
 
 class ImageProcessingThread( QThread ):
   def __init__( self, dir, photos, outputFileName, outputEncoding ):
