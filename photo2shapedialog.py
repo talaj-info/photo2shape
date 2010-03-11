@@ -36,6 +36,8 @@ from qgis.gui import *
 import os.path, re
 import EXIF
 
+import photo2shape_utils as utils
+
 from photo2shapedialogbase import Ui_Photo2ShapeDialog
 
 class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
@@ -51,8 +53,15 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     QObject.connect( self.selectInputDirButton, SIGNAL( "clicked()" ), self.selectInputDir )
     QObject.connect( self.selectOutputFileButton, SIGNAL( "clicked()" ), self.selectOutputFile )
 
+    self.manageGui()
+
+  def manageGui( self ):
+    self.addToCanvasCheck.setCheckState( utils.addToCanvas() )
+
   def selectInputDir( self ):
-    inputDir = QFileDialog.getExistingDirectory( self, self.tr( "Select directory with images" ) )
+    inputDir = QFileDialog.getExistingDirectory( self,
+                           self.tr( "Select directory with images" ),
+                           utils.lastPhotosDir() )
     if inputDir.isEmpty():
       return
 
@@ -66,13 +75,14 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
       self.inputFiles = None
       return
 
+    utils.setLastPhotosDir( inputDir )
     self.progressBar.setRange( 0, self.inputFiles.count() )
     self.inputDirEdit.setText( inputDir )
 
   def selectOutputFile( self ):
     # prepare dialog parameters
     settings = QSettings()
-    lastDir = settings.value( "/UI/lastShapefileDir" ).toString()
+    lastDir = utils.lastShapefileDir() #settings.value( "/UI/lastShapefileDir" ).toString()
     filter = QString( "Shapefiles (*.shp *.SHP)" )
 
     fileDialog = QgsEncodingFileDialog( self, self.tr( "Select output shapefile" ), lastDir, filter, QString() )
@@ -87,7 +97,13 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     outputFile = fileDialog.selectedFiles()
     self.outputEncoding = fileDialog.encoding()
 
+    utils.setLastShapefileDir( outputFile.first() )
     self.outputFileEdit.setText( outputFile.first() )
+
+  def reject( self ):
+    utils.setAddToCanvas( self.addToCanvasCheck.checkState() )
+
+    QDialog.reject( self )
 
   def accept( self ):
     outFileName = self.outputFileEdit.text()
@@ -156,6 +172,16 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     sourceQml = os.path.join( os.path.dirname( __file__ ), "photos.qml" )
     sourceFile = QFile( sourceQml )
     outputQml = self.outputFileEdit.text().replace( QRegExp( "\.shp$" ), ".qml" )
+    outputFile = QFile( outputQml )
+    if outputFile.exists():
+      res = QMessageBox.question( self, self.tr( "QML exists" ),
+                        self.tr( "QML file %1 already exists. Overwrite?" )
+                        .arg( outputQml ),
+                        QMessageBox.Yes | QMessageBox.No )
+      if res != QMessageBox.Yes:
+        return
+      outputFile.remove()
+
     if not sourceFile.copy( outputQml ):
       QMessageBox.warning( self, self.tr( "QML error" ), self.tr( "Can't write QML file" ) )
 
