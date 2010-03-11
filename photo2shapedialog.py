@@ -5,7 +5,7 @@
 # Photo2Shape
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images
-# 
+#
 # Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010 Alexander Bruy (alexander.bruy@gmail.com)
@@ -65,7 +65,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
       QMessageBox.warning( self, self.tr( "No images found" ), self.tr( "There are no supported images in this directory. Please select another one." ) )
       self.inputFiles = None
       return
-    
+
     self.progressBar.setRange( 0, self.inputFiles.count() )
     self.inputDirEdit.setText( inputDir )
 
@@ -124,6 +124,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
       dlgError = QErrorMessage( self )
       dlgError.showMessage( msg )
 
+    self.writeQml()
     if self.addToCanvasCheck.isChecked():
       self.addLayerToCanvas()
 
@@ -150,6 +151,13 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
 
     if newLayer.isValid():
       QgsMapLayerRegistry.instance().addMapLayer( newLayer )
+
+  def writeQml( self ):
+    sourceQml = os.path.join( os.path.dirname( __file__ ), "photos.qml" )
+    sourceFile = QFile( sourceQml )
+    outputQml = self.outputFileEdit.text().replace( QRegExp( "\.shp$" ), ".qml" )
+    if not sourceFile.copy( outputQml ):
+      QMessageBox.warning( self, self.tr( "QML error" ), self.tr( "Can't write QML file" ) )
 
 def getCoordinates( tags ):
   exifTags = tags
@@ -232,7 +240,10 @@ def getCoordinates( tags ):
 def getAltitude( tags ):
   exifTags = tags
 
-  # altitude 
+  if not exifTags.has_key( "GPS GPSAltitudeRef" ):
+    return None
+
+  # altitude
   altDirection = exifTags[ "GPS GPSAltitudeRef" ]
   altitude = str( exifTags[ "GPS GPSAltitude" ] )
 
@@ -251,7 +262,7 @@ def getAltitude( tags ):
   if altDirection == 1:
     myAltitude = 0 - myAltitude
 
-  return myAltitude
+  return round( myAltitude, 7 )
 
 def getDateTime( tags ):
   pass
@@ -262,7 +273,7 @@ def getDirection( tags ):
   if not exifTags.has_key( "GPS GPSImgDirection" ):
     return None
 
-  dirAzimuth = str( exifTags[ "GPS GPSImgDirectionRef" ] )
+  myAzimuth = str( exifTags[ "GPS GPSImgDirectionRef" ] )
   direction = str( exifTags[ "GPS GPSImgDirection" ] )
 
   # get direction value
@@ -276,7 +287,7 @@ def getDirection( tags ):
   else:
     myDirection = directionFloat / float( regexp.search( str( direction ) ).group() )
 
-  return myDirection
+  return ( myAzimuth, round( myDirection, 7 ) )
 
 class ImageProcessingThread( QThread ):
   def __init__( self, dir, photos, outputFileName, outputEncoding ):
@@ -301,7 +312,9 @@ class ImageProcessingThread( QThread ):
                     1:QgsField( "filename", QVariant.String ),
                     2:QgsField( "longitude", QVariant.Double ),
                     3:QgsField( "latitude", QVariant.Double ),
-                    4:QgsField( "altitude", QVariant.Double ) }
+                    4:QgsField( "altitude", QVariant.Double ),
+                    5:QgsField( "north", QVariant.String ),
+                    6:QgsField( "direction", QVariant.Double ) }
 
     crs = QgsCoordinateReferenceSystem( 4326 )
 
@@ -321,13 +334,23 @@ class ImageProcessingThread( QThread ):
         continue
 
       ( lon, lat ) = getCoordinates( exifTags )
-      alt = getAltitude( exifTags )
-
       # if coordinates are empty, write message to log and skip this file
       #if lon == 0 and lat == 0:
       #  self.noTags.append( QString( "%1 - has null coordinates" ).arg( path ) )
       #  self.emit( SIGNAL( "photoProcessed()" ) )
       #  continue
+
+      altitude = getAltitude( exifTags )
+      if altitude == None:
+        altitude = 0
+
+      imgDirection = getDirection( exifTags )
+      if imgDirection == None:
+        north = ""
+        direction = 0
+      else:
+        north = imgDirection[ 0 ]
+        direction = imgDirection[ 1 ]
 
       # write point to the shapefile
       feature = QgsFeature()
@@ -338,7 +361,9 @@ class ImageProcessingThread( QThread ):
       feature.addAttribute( 1, fileName )
       feature.addAttribute( 2, QVariant( lon ) )
       feature.addAttribute( 3, QVariant( lat ) )
-      feature.addAttribute( 4, QVariant( alt ) )
+      feature.addAttribute( 4, QVariant( altitude ) )
+      feature.addAttribute( 5, QVariant( north ) )
+      feature.addAttribute( 6, QVariant( direction ) )
       shapeFileWriter.addFeature( feature )
       featureId += 1
 

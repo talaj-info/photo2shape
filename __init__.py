@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-mVersion = "0.1.6"
+mVersion = "0.1.8"
 
 #******************************************************************************
 #
 # Photo2Shape
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images
-# 
+#
 # Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010 Alexander Bruy (alexander.bruy@gmail.com)
@@ -30,21 +30,21 @@ mVersion = "0.1.6"
 #******************************************************************************
 
 def name():
-	return "Photo2Shape"
+  return "Photo2Shape"
 
 def description():
-	return "Create a point shapefile from a set of geotagged images"
+  return "Create a point shapefile from a set of geotagged images"
 
 def version():
-	return mVersion
+  return mVersion
 
 def qgisMinimumVersion():
-	return "1.0"
-	
+  return "1.0"
+
 def authorName():
-	return "Alexander Bruy"
+  return "Alexander Bruy"
 
 def classFactory( iface ):
-	from photo2shape import Photo2ShapePlugin
-	return Photo2ShapePlugin( iface )
+  from photo2shape import Photo2ShapePlugin
+  return Photo2ShapePlugin( iface )
 
