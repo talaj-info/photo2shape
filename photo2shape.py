@@ -5,7 +5,7 @@
 # Photo2Shape
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images.
-# 
+#
 # Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010 Alexander Bruy (alexander.bruy@gmail.com)
@@ -87,7 +87,7 @@ class Photo2ShapePlugin( object ):
     self.iface.addPluginToMenu( "Photo2Shape", self.actionAbout )
 
     self.iface.addToolBarIcon( self.actionRun )
- 
+
   def unload( self ):
     self.iface.removePluginMenu( "Photo2Shape", self.actionRun )
     self.iface.removePluginMenu( "Photo2Shape", self.actionAbout )
@@ -118,16 +118,16 @@ class Photo2ShapePlugin( object ):
     localeShortName = localeFullName[ 0:2 ]
     if localeShortName in [ "ru", "uk" ]:
       link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>" )
-    #else:
-    #  link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape-eng.html\">http://gis-lab.info/qa/photo2shape-eng.html</a>" )
-    
+    else:
+      link = QLabel( "<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>" )
+
     link.setOpenExternalLinks( True )
     lines.addWidget( link )
-    
+
     btnClose = QPushButton( QApplication.translate( "Photo2Shape", "Close" ) )
     lines.addWidget( btnClose )
     QObject.connect( btnClose, SIGNAL( "clicked()" ), dlgAbout, SLOT( "close()" ) )
-    
+
     dlgAbout.exec_()
 
   def run( self ):
