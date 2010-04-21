@@ -188,6 +188,15 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
 def getCoordinates( tags ):
   exifTags = tags
 
+  # some devices (e.g. with Android 1.6 ) write tags in non standard way
+  # as decimal degrees in ASCII field
+  if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSLongitude" ].field_type ][ 2 ] == 'ASCII':
+    strLon = str( exifTags[ "GPS GPSLongitude" ] )
+    strLat = str( exifTags[ "GPS GPSLatitude" ] )
+    lon = round( float( strLon ), 7 )
+    lat = round( float( strLat ), 7 )
+    return ( lon, lat )
+
   # get the position info as reported by EXIF
   lonDirection = None
   lonDegrees = None
@@ -265,6 +274,12 @@ def getCoordinates( tags ):
 
 def getAltitude( tags ):
   exifTags = tags
+
+  # some devices (e.g. with Android 1.6 ) write tags in non standard way
+  # as decimal degrees in ASCII field
+  if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSAltitude" ].field_type ][ 2 ] == 'ASCII':
+    alt = str( exifTags[ "GPS GPSAltitude" ] )
+    return round( float( alt ), 7 )
 
   if not exifTags.has_key( "GPS GPSAltitudeRef" ):
     return None
@@ -354,7 +369,7 @@ class ImageProcessingThread( QThread ):
       photoFile.close()
 
       # check for GPS tags. If no tags found, write message to log and skip this file
-      if ( not exifTags.has_key( "GPS GPSLongitudeRef" ) ) or ( not exifTags.has_key( "GPS GPSLatitudeRef" ) ):
+      if ( not exifTags.has_key( "GPS GPSLongitude" ) ) or ( not exifTags.has_key( "GPS GPSLatitude" ) ):
         self.noTags.append( QString( "%1 - does not have GPS tags" ).arg( path ) )
         self.emit( SIGNAL( "photoProcessed()" ) )
         continue

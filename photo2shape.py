@@ -103,7 +103,7 @@ class Photo2ShapePlugin( object ):
     version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( mVersion ) )
     version.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( version )
-    lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin creates a point shapefile\nfrom a set ofgeotagged images" ) ) )
+    lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images" ) ) )
     lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "<b>Developers:</b>" ) ) )
     lines.addWidget( QLabel( "  Tim Sutton" ) )
     lines.addWidget( QLabel( "  Alexander Bruy" ) )
