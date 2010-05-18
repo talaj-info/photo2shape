@@ -349,12 +349,12 @@ class ImageProcessingThread( QThread ):
 
     interrupted = False
 
-    shapeFields = { 0:QgsField( "filepath", QVariant.String ),
-                    1:QgsField( "filename", QVariant.String ),
+    shapeFields = { 0:QgsField( "filepath", QVariant.String, QString(), 255 ),
+                    1:QgsField( "filename", QVariant.String, QString(), 255 ),
                     2:QgsField( "longitude", QVariant.Double ),
                     3:QgsField( "latitude", QVariant.Double ),
                     4:QgsField( "altitude", QVariant.Double ),
-                    5:QgsField( "north", QVariant.String ),
+                    5:QgsField( "north", QVariant.String, QString(), 1 ),
                     6:QgsField( "direction", QVariant.Double ) }
 
     crs = QgsCoordinateReferenceSystem( 4326 )
@@ -363,7 +363,7 @@ class ImageProcessingThread( QThread ):
 
     featureId = 0
     for fileName in self.photos:
-      path = QFileInfo( self.baseDir + "/" + fileName ).absoluteFilePath()
+      path = os.path.abspath( unicode( QFileInfo( self.baseDir + "/" + fileName ).absoluteFilePath() ) )
       photoFile = open( path, "rb" )
       exifTags = EXIF.process_file( photoFile )
       photoFile.close()
