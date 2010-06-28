@@ -136,7 +136,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     self.stopProcessing()
 
     if not errorsList.isEmpty():
-      msg = QString( "The following files does added to shapefile because of errors: <br><br>" ).append( errorsList.join( "<br><br>" ) )
+      msg = QString( "The following files were not added to shapefile because of errors: <br><br>" ).append( errorsList.join( "<br><br>" ) )
       dlgError = QErrorMessage( self )
       dlgError.showMessage( msg )
 
