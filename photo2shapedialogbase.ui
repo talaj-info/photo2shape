@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Images to shapefile</string>
+   <string>Photo2Shape</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

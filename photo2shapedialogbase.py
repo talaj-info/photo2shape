@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'photo2shapedialogbase.ui'
 #
-# Created: Sat Feb 27 13:02:58 2010
+# Created: Mon Jun 28 18:45:19 2010
 #      by: PyQt4 UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,7 +61,7 @@ class Ui_Photo2ShapeDialog(object):
         QtCore.QMetaObject.connectSlotsByName(Photo2ShapeDialog)
 
     def retranslateUi(self, Photo2ShapeDialog):
-        Photo2ShapeDialog.setWindowTitle(QtGui.QApplication.translate("Photo2ShapeDialog", "Images to shapefile", None, QtGui.QApplication.UnicodeUTF8))
+        Photo2ShapeDialog.setWindowTitle(QtGui.QApplication.translate("Photo2ShapeDialog", "Photo2Shape", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Photo2ShapeDialog", "Directory with images", None, QtGui.QApplication.UnicodeUTF8))
         self.selectInputDirButton.setText(QtGui.QApplication.translate("Photo2ShapeDialog", "Browse", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Photo2ShapeDialog", "Output shapefile", None, QtGui.QApplication.UnicodeUTF8))
