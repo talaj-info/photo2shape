@@ -33,7 +33,7 @@
   <label>0</label>
   <attributeactions/>
   <labelattributes>
-    <label fieldname="" text="Подпись" />
+    <label fieldname="" text="Label" />
     <family fieldname="" name="Sans Serif" />
     <size fieldname="" units="pt" value="12" />
     <bold fieldname="" on="0" />

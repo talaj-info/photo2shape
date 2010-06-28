@@ -120,7 +120,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
 
     self.photoProcessingThread = ImageProcessingThread( baseDir, self.inputFiles, outFileName, self.outputEncoding )
     QObject.connect( self.photoProcessingThread, SIGNAL( "photoProcessed()" ), self.photoProcessed )
-    QObject.connect( self.photoProcessingThread, SIGNAL( "processingFinished( PyQt_PyObject )" ), self.processingFinished )
+    QObject.connect( self.photoProcessingThread, SIGNAL( "processingFinished( PyQt_PyObject, PyQt_PyObject )" ), self.processingFinished )
     QObject.connect( self.photoProcessingThread, SIGNAL( "processingInterrupted()" ), self.processingInterrupted )
 
     self.closeButton.setText( self.tr( "Cancel" ) )
@@ -132,8 +132,14 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
   def photoProcessed( self ):
     self.progressBar.setValue( self.progressBar.value() + 1 )
 
-  def processingFinished( self, errorsList ):
+  def processingFinished( self, errorsList, hasOutput ):
     self.stopProcessing()
+
+    if not hasOutput:
+      QMessageBox.warning( self, self.tr( "Photo2Shape" ),
+                  self.tr( "There are no geotagged photos in selected directory.\nShapefile was not created." ) )
+      self.restoreGUI()
+      return
 
     if not errorsList.isEmpty():
       msg = QString( "The following files were not added to shapefile because of errors: <br><br>" ).append( errorsList.join( "<br><br>" ) )
@@ -167,8 +173,13 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
 
     if newLayer.isValid():
       QgsMapLayerRegistry.instance().addMapLayer( newLayer )
+    else:
+      QMessageBox.warning( self, self.tr( "Photo2Shape" ), self.tr( "Error loading output shapefile:\n%1" ).arg( unicode( layerPath ) ) )
 
   def writeQml( self ):
+    if not QFile( self.outputFileEdit.text() ).exists():
+      return
+
     sourceQml = os.path.join( os.path.dirname( __file__ ), "photos.qml" )
     sourceFile = QFile( sourceQml )
     outputQml = self.outputFileEdit.text().replace( QRegExp( "\.shp$" ), ".qml" )
@@ -418,9 +429,13 @@ class ImageProcessingThread( QThread ):
         break
 
     del shapeFileWriter
+    haveShape = True
 
     if not interrupted:
-      self.emit( SIGNAL( "processingFinished( PyQt_PyObject )" ), self.noTags )
+      if featureId == 0:
+        QgsVectorFileWriter.deleteShapeFile( self.outputFileName )
+        haveShape = False
+      self.emit( SIGNAL( "processingFinished( PyQt_PyObject, PyQt_PyObject )" ), self.noTags, haveShape )
     else:
       self.emit( SIGNAL( "processingInterrupted()" ) )
 
