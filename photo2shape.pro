@@ -5,4 +5,5 @@ SOURCES = __init__.py \
 FORMS = photo2shapedialogbase.ui
 
 TRANSLATIONS = i18n/photo2shape_ru_RU.ts \
-               i18n/photo2shape_uk_UA.ts
+               i18n/photo2shape_uk_UA.ts \
+               i18n/photo2shape_fr_FR.ts

@@ -6,9 +6,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This version of RasterCalc requires at least QGIS version 1.0.0
+        <source>This version of Photo2Shape requires at least QGIS version 1.0.0
 Plugin will not be enabled.</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a point shapefile from a set of geotagged images</source>
@@ -44,34 +44,9 @@ from a set of geotagged images</source>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>This version of Photo2Shape requires at least QGIS version 1.0.0
-Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Photo2ShapeDialog</name>
-    <message>
-        <source>Photo2Shape</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Directory with images</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Output shapefile</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Add result to canvas</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>Select directory with images</source>
         <translation type="unfinished"></translation>
@@ -98,6 +73,10 @@ Plugin will not be enabled.</source>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Photo2Shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -73,7 +73,7 @@ class Photo2ShapePlugin( object ):
     if int( self.QgisVersion ) < 1:
       QMessageBox.warning( self.iface.mainWindow(), "Photo2Shape",
                            QCoreApplication.translate( "Photo2Shape", "Quantum GIS version detected: " ) + unicode( self.QgisVersion ) + ".xx\n" +
-                           QCoreApplication.translate( "Photo2Shape", "This version of RasterCalc requires at least QGIS version 1.0.0\nPlugin will not be enabled." ) )
+                           QCoreApplication.translate( "Photo2Shape", "This version of Photo2Shape requires at least QGIS version 1.0.0\nPlugin will not be enabled." ) )
       return None
 
     self.actionRun = QAction( QIcon( ":/photo2shape.png" ), "Photo2Shape", self.iface.mainWindow() )
