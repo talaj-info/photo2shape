@@ -107,6 +107,13 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
 
   def accept( self ):
     outFileName = self.outputFileEdit.text()
+
+    if outFileName.isEmpty():
+      QMessageBox.warning( self, self.tr( "Wrong output file" ),
+         self.tr( "Output file is improperly defined.\nPlease enter a valid filename and try again." ) )
+      return
+
+
     outFile = QFile( outFileName )
     if outFile.exists():
       if not QgsVectorFileWriter.deleteShapeFile( outFileName ):

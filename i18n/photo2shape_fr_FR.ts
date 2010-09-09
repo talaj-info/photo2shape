@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<!DOCTYPE TS><TS version="1.1" language="fr_FR">
 <context>
     <name>Photo2Shape</name>
     <message>
@@ -12,7 +11,7 @@
         <location filename="photo2shape.py" line="75"/>
         <source>This version of RasterCalc requires at least QGIS version 1.0.0
 Plugin will not be enabled.</source>
-        <translation>Cette version de photo2shape a besoin au minimum de QGis 1.0
+        <translation type="obsolete">Cette version de photo2shape a besoin au minimum de QGis 1.0
 Le Plugin ne pourra pas être chargé.</translation>
     </message>
     <message>
@@ -57,11 +56,17 @@ from a set of geotagged images</source>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
+    <message>
+        <location filename="photo2shape.py" line="75"/>
+        <source>This version of Photo2Shape requires at least QGIS version 1.0.0
+Plugin will not be enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Photo2ShapeDialog</name>
     <message>
-        <location filename="photo2shapedialog.py" line="176"/>
+        <location filename="photo2shapedialog.py" line="183"/>
         <source>Photo2Shape</source>
         <translation>Photo2Shape</translation>
     </message>
@@ -106,57 +111,68 @@ from a set of geotagged images</source>
         <translation>Sélectionner le fichier shape en sortie</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="112"/>
+        <location filename="photo2shapedialog.py" line="119"/>
         <source>Delete error</source>
         <translation>Erreur dans la destruction</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="112"/>
+        <location filename="photo2shapedialog.py" line="119"/>
         <source>Can&apos;t delete file %1</source>
         <translation>Ne peut pas effacer le fichier %1</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="125"/>
+        <location filename="photo2shapedialog.py" line="132"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="139"/>
+        <location filename="photo2shapedialog.py" line="146"/>
         <source>There are no geotagged photos in selected directory.
 Shapefile was not created.</source>
         <translation>Il n&apos;y a pas de photo géoréférencée dans ce répertoire, merci d&apos;en choisir un autre.</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="166"/>
+        <location filename="photo2shapedialog.py" line="173"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="176"/>
+        <location filename="photo2shapedialog.py" line="183"/>
         <source>Error loading output shapefile:
 %1</source>
         <translation>Erreur dans le chargement du fichier shape :
 %1</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="187"/>
+        <location filename="photo2shapedialog.py" line="194"/>
         <source>QML exists</source>
         <translation>Le fichier QML existe</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="189"/>
+        <location filename="photo2shapedialog.py" line="196"/>
         <source>QML file %1 already exists. Overwrite?</source>
         <translation>Le fichier QML %1 existe, l&apos;écraser ?</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="196"/>
+        <location filename="photo2shapedialog.py" line="203"/>
         <source>QML error</source>
         <translation>Erreur avec le fichier QML</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="196"/>
+        <location filename="photo2shapedialog.py" line="203"/>
         <source>Can&apos;t write QML file</source>
         <translation>Ne peut pas écrire le fichier QML</translation>
+    </message>
+    <message>
+        <location filename="photo2shapedialog.py" line="111"/>
+        <source>Wrong output file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photo2shapedialog.py" line="112"/>
+        <source>Output file is improperly defined.
+Please enter a valid filename and try again.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
