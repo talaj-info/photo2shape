@@ -78,6 +78,7 @@ class Photo2ShapePlugin( object ):
 
     self.actionRun = QAction( QIcon( ":/photo2shape.png" ), "Photo2Shape", self.iface.mainWindow() )
     self.actionRun.setStatusTip( QCoreApplication.translate( "Photo2Shape", "Create a point shapefile from a set of geotagged images" ) )
+    self.actionRun.setWhatsThis( QCoreApplication.translate( "Photo2Shape", "Create a point shapefile from a set of geotagged images" ) )
     self.actionAbout = QAction( QIcon( ":/about.png" ), "About", self.iface.mainWindow() )
 
     QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
