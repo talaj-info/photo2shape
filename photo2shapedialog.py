@@ -293,8 +293,12 @@ def getCoordinates( tags ):
 def getAltitude( tags ):
   exifTags = tags
 
+  if not exifTags.has_key( "GPS GPSAltitude" ):
+    return None
+
   # some devices (e.g. with Android 1.6 ) write tags in non standard way
-  # as decimal degrees in ASCII field
+  # as decimal degrees in ASCII field also they don't write
+  # GPS GPSAltitudeRef tag
   if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSAltitude" ].field_type ][ 2 ] == 'ASCII':
     alt = str( exifTags[ "GPS GPSAltitude" ] )
     return round( float( alt ), 7 )
