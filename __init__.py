@@ -44,6 +44,9 @@ def qgisMinimumVersion():
 def authorName():
   return "Alexander Bruy"
 
+def icon():
+  return "photo2shape.png"
+
 def classFactory( iface ):
   from photo2shape import Photo2ShapePlugin
   return Photo2ShapePlugin( iface )
