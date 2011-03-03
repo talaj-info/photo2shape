@@ -82,7 +82,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
   def selectOutputFile( self ):
     # prepare dialog parameters
     settings = QSettings()
-    lastDir = utils.lastShapefileDir() #settings.value( "/UI/lastShapefileDir" ).toString()
+    lastDir = utils.lastShapefileDir()
     filter = QString( "Shapefiles (*.shp *.SHP)" )
 
     fileDialog = QgsEncodingFileDialog( self, self.tr( "Select output shapefile" ), lastDir, filter, QString() )
@@ -181,7 +181,9 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     if newLayer.isValid():
       QgsMapLayerRegistry.instance().addMapLayer( newLayer )
     else:
-      QMessageBox.warning( self, self.tr( "Photo2Shape" ), self.tr( "Error loading output shapefile:\n%1" ).arg( unicode( layerPath ) ) )
+      QMessageBox.warning( self, self.tr( "Photo2Shape" ),
+                           self.tr( "Error loading output shapefile:\n%1" )
+                           .arg( unicode( layerPath ) ) )
 
   def writeQml( self ):
     if not QFile( self.outputFileEdit.text() ).exists():
@@ -293,8 +295,12 @@ def getCoordinates( tags ):
 def getAltitude( tags ):
   exifTags = tags
 
+  if not exifTags.has_key( "GPS GPSAltitude" ):
+    return None
+
   # some devices (e.g. with Android 1.6 ) write tags in non standard way
-  # as decimal degrees in ASCII field
+  # as decimal degrees in ASCII field also they don't write
+  # GPS GPSAltitudeRef tag
   if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSAltitude" ].field_type ][ 2 ] == 'ASCII':
     alt = str( exifTags[ "GPS GPSAltitude" ] )
     return round( float( alt ), 7 )
