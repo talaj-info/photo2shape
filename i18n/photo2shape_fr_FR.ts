@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="fr_FR">
+<!DOCTYPE TS>
+<TS version="2.0" language="fr_FR">
 <context>
     <name>Photo2Shape</name>
     <message>
@@ -23,7 +24,7 @@ Le Plugin ne pourra pas être chargé.</translation>
         <location filename="photo2shape.py" line="97"/>
         <source>About Photo2Shape</source>
         <comment>Window title</comment>
-        <translation type="unfinished">à propos</translation>
+        <translation>à propos</translation>
     </message>
     <message>
         <location filename="photo2shape.py" line="99"/>
@@ -60,7 +61,8 @@ from a set of geotagged images</source>
         <location filename="photo2shape.py" line="75"/>
         <source>This version of Photo2Shape requires at least QGIS version 1.0.0
 Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette version de photo2shape a besoin au minimum de QGis 1.0
+Le Plugin ne pourra pas être chargé.</translation>
     </message>
 </context>
 <context>
@@ -166,13 +168,14 @@ Shapefile was not created.</source>
     <message>
         <location filename="photo2shapedialog.py" line="111"/>
         <source>Wrong output file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier en sotie faux</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="112"/>
         <source>Output file is improperly defined.
 Please enter a valid filename and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier en sortie mal défini.
+Merci d&apos;entrer un nom valide et de réessayer.</translation>
     </message>
 </context>
 </TS>
