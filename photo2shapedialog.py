@@ -83,9 +83,9 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     # prepare dialog parameters
     settings = QSettings()
     lastDir = utils.lastShapefileDir()
-    filter = QString( "Shapefiles (*.shp *.SHP)" )
+    shpFilter = QString( "Shapefiles (*.shp *.SHP)" )
 
-    fileDialog = QgsEncodingFileDialog( self, self.tr( "Select output shapefile" ), lastDir, filter, QString() )
+    fileDialog = QgsEncodingFileDialog( self, self.tr( "Select output shapefile" ), lastDir, shpFilter, QString() )
     fileDialog.setDefaultSuffix( QString( "shp" ) )
     fileDialog.setFileMode( QFileDialog.AnyFile )
     fileDialog.setAcceptMode( QFileDialog.AcceptSave )
