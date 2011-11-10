@@ -1,7 +1,7 @@
 [general]
 name=Photo2Shape
 description=Create a point shapefile from a set of geotagged images
-version=Version 0.1.18
+version=Version 0.1.19
 authorName=Alexander Bruy
 icon=photo2shape.png
 qgisMinimumVersion=1.0.0
