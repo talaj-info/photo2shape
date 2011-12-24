@@ -84,15 +84,24 @@ class Photo2ShapePlugin( object ):
     QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
     QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
 
-    self.iface.addPluginToMenu( "Photo2Shape", self.actionRun )
-    self.iface.addPluginToMenu( "Photo2Shape", self.actionAbout )
-
-    self.iface.addToolBarIcon( self.actionRun )
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.addVectorToolBarIcon( self.actionRun )
+    else:
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.addToolBarIcon( self.actionRun )
 
   def unload( self ):
-    self.iface.removePluginMenu( "Photo2Shape", self.actionRun )
-    self.iface.removePluginMenu( "Photo2Shape", self.actionAbout )
-    self.iface.removeToolBarIcon( self.actionRun )
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.removeVectorToolBarIcon( self.actionRun )
+    else:
+      self.iface.removePluginMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.removePluginMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.removeToolBarIcon( self.actionRun )
 
   def about( self ):
     dlgAbout = QDialog()
