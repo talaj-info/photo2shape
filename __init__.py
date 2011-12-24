@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-mVersion = "0.1.19"
+mVersion = "0.1.20"
 
 #******************************************************************************
 #
@@ -34,6 +34,9 @@ def name():
 
 def description():
   return "Create a point shapefile from a set of geotagged images"
+
+def category():
+  return "Vector"
 
 def version():
   return mVersion
