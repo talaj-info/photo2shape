@@ -420,7 +420,7 @@ class ImageProcessingThread( QThread ):
     for fileName in self.photos:
       path = os.path.abspath( unicode( QFileInfo( self.baseDir + "/" + fileName ).absoluteFilePath() ) )
       photoFile = open( path, "rb" )
-      exifTags = EXIF.process_file( photoFile )
+      exifTags = EXIF.process_file( photoFile, details=False )
       photoFile.close()
 
       # check for GPS tags. If no tags found, write message to log and skip this file
@@ -451,6 +451,8 @@ class ImageProcessingThread( QThread ):
       gpsDate = getGPSDateTime( exifTags )
       print "get imageDateTime"
       imgDate = getImageDateTime( exifTags )
+
+      exifTags = None
 
       # write point to the shapefile
       feature = QgsFeature()
