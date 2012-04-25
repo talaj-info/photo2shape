@@ -5,7 +5,7 @@ category = Vector
 version = 0.1.21
 qgisMinimumVersion = 1.0.0
 
-icon = icons/photo2shape.png
+icon = photo2shape.png
 
 authorName=Alexander Bruy
 
