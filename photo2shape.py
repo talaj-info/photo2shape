@@ -37,7 +37,7 @@ import photo2shapedialog
 
 from __init__ import mVersion
 
-import resources
+import resources_rc
 
 class Photo2ShapePlugin( object ):
   def __init__( self, iface ):
