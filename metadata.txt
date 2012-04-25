@@ -1,8 +1,19 @@
 [general]
-name=Photo2Shape
-description=Create a point shapefile from a set of geotagged images
-category=Vector
-version=Version 0.1.20
+name = Photo2Shape
+description = Create a point shapefile from a set of geotagged images
+category = Vector
+version = 0.1.21
+qgisMinimumVersion = 1.0.0
+
+icon = icons/photo2shape.png
+
 authorName=Alexander Bruy
-icon=photo2shape.png
-qgisMinimumVersion=1.0.0
+
+tags=photo, shape, vector
+
+homepage =
+tracker = http://hub.qgis.org/projects/photo2shape
+repository =
+
+experimental = False
+deprecated = False
