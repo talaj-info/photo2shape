@@ -329,8 +329,37 @@ def getAltitude( tags ):
 
   return round( myAltitude, 7 )
 
-def getDateTime( tags ):
-  pass
+def getGPSDateTime( tags ):
+  exifTags = tags
+
+  imgDate = None
+  imgTime = None
+
+  if exifTags.has_key( "GPS GPSDate" ):
+    imgDate = str( exifTags[ "GPS GPSDate" ] )
+    print "DATE", imgDate
+
+  if exifTags.has_key( "GPS GPSTimeStamp" ):
+    # some devices (e.g. Android) save this tag in non-standard way
+    if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSTimeStamp" ].field_type ][ 2 ] == 'ASCII':
+      print "TIME NS", exifTags[ "GPS GPSTimeStamp" ]
+      return str( exifTags[ "GPS GPSTimeStamp" ] )
+    else:
+      tmp = str( exifTags[ "GPS GPSTimeStamp" ] )[ 1:-1 ].split( ", " )
+      imgTime = tmp[ 0 ] + ":" + tmp[ 1 ] + ":" + tmp[ 2 ]
+      print "TIME", imgTime
+      return imgDate + " " + imgTime
+
+  return None
+
+def getImageDateTime( tags ):
+  exifTags = tags
+
+  if exifTags.has_key( "Image DateTime" ):
+    print "IMAGE DATE", exifTags[ "Image DateTime" ]
+    return str( exifTags[ "Image DateTime" ] )
+
+  return None
 
 def getDirection( tags ):
   exifTags = tags
@@ -379,7 +408,9 @@ class ImageProcessingThread( QThread ):
                     3:QgsField( "latitude", QVariant.Double ),
                     4:QgsField( "altitude", QVariant.Double ),
                     5:QgsField( "north", QVariant.String, QString(), 1 ),
-                    6:QgsField( "direction", QVariant.Double ) }
+                    6:QgsField( "direction", QVariant.Double ),
+                    7:QgsField( "gps_date", QVariant.String, QString(), 255 ),
+                    8:QgsField( "img_date", QVariant.String, QString(), 255 ) }
 
     crs = QgsCoordinateReferenceSystem( 4326 )
 
@@ -417,6 +448,10 @@ class ImageProcessingThread( QThread ):
         north = imgDirection[ 0 ]
         direction = imgDirection[ 1 ]
 
+      gpsDate = getGPSDateTime( exifTags )
+      print "get imageDateTime"
+      imgDate = getImageDateTime( exifTags )
+
       # write point to the shapefile
       feature = QgsFeature()
       geometry = QgsGeometry()
@@ -429,6 +464,8 @@ class ImageProcessingThread( QThread ):
       feature.addAttribute( 4, QVariant( altitude ) )
       feature.addAttribute( 5, QVariant( north ) )
       feature.addAttribute( 6, QVariant( direction ) )
+      feature.addAttribute( 7, QVariant( gpsDate ) )
+      feature.addAttribute( 8, QVariant( imgDate ) )
       shapeFileWriter.addFeature( feature )
       featureId += 1
 
