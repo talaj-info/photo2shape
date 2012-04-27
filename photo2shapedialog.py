@@ -335,17 +335,16 @@ def getGPSDateTime( tags ):
 
   if exifTags.has_key( "GPS GPSDate" ):
     imgDate = str( exifTags[ "GPS GPSDate" ] )
-    print "DATE", imgDate
 
   if exifTags.has_key( "GPS GPSTimeStamp" ):
     # some devices (e.g. Android) save this tag in non-standard way
     if EXIF.FIELD_TYPES[ exifTags[ "GPS GPSTimeStamp" ].field_type ][ 2 ] == 'ASCII':
-      print "TIME NS", exifTags[ "GPS GPSTimeStamp" ]
       return str( exifTags[ "GPS GPSTimeStamp" ] )
     else:
       tmp = str( exifTags[ "GPS GPSTimeStamp" ] )[ 1:-1 ].split( ", " )
       imgTime = tmp[ 0 ] + ":" + tmp[ 1 ] + ":" + tmp[ 2 ]
-      print "TIME", imgTime
+      if imgData is None:
+        return imgTime
       return imgDate + " " + imgTime
 
   return None
@@ -354,7 +353,6 @@ def getImageDateTime( tags ):
   exifTags = tags
 
   if exifTags.has_key( "Image DateTime" ):
-    print "IMAGE DATE", exifTags[ "Image DateTime" ]
     return str( exifTags[ "Image DateTime" ] )
 
   return None

@@ -42,7 +42,7 @@ clean:
 
 package:
 	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc -x \*~ -x \*.git\*
-	mv ../qconsolidate.experimental.zip .
+	mv ../photo2shape.zip .
 
 upload:
 	plugin_uploader.py photo2shape.zip
