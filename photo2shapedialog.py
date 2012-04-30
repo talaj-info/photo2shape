@@ -447,7 +447,6 @@ class ImageProcessingThread( QThread ):
         direction = imgDirection[ 1 ]
 
       gpsDate = getGPSDateTime( exifTags )
-      print "get imageDateTime"
       imgDate = getImageDateTime( exifTags )
 
       exifTags = None
