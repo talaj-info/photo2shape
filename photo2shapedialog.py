@@ -345,7 +345,7 @@ def getGPSDateTime( tags ):
     else:
       tmp = str( exifTags[ "GPS GPSTimeStamp" ] )[ 1:-1 ].split( ", " )
       imgTime = tmp[ 0 ] + ":" + tmp[ 1 ] + ":" + tmp[ 2 ]
-      if imgData is None:
+      if imgDate is None:
         return imgTime
       return imgDate + " " + imgTime
 
