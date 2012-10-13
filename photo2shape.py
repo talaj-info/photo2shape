@@ -33,9 +33,8 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 
+from __init__ import version as pversion
 import photo2shapedialog
-
-from __init__ import mVersion
 
 import resources_rc
 
@@ -110,7 +109,7 @@ class Photo2ShapePlugin( object ):
     title = QLabel( QApplication.translate( "Photo2Shape", "<b>Photo2Shape</b>" ) )
     title.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( title )
-    version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( mVersion ) )
+    version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( pversion() ) )
     version.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( version )
     lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images" ) ) )

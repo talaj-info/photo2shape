@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-mVersion = "0.1.23"
-
 #******************************************************************************
 #
 # Photo2Shape
@@ -39,13 +37,16 @@ def category():
   return "Vector"
 
 def version():
-  return mVersion
+  return "0.1.23"
 
 def qgisMinimumVersion():
   return "1.0"
 
-def authorName():
+def author():
   return "Alexander Bruy"
+
+def email():
+  return "alexander.bruy@gmail.com"
 
 def icon():
   return "photo2shape.png"
@@ -53,4 +54,3 @@ def icon():
 def classFactory( iface ):
   from photo2shape import Photo2ShapePlugin
   return Photo2ShapePlugin( iface )
-
