@@ -5,11 +5,12 @@ category = Vector
 version = 0.1.23
 qgisMinimumVersion = 1.0.0
 
+author = Alexander Bruy
+email = alexander.bruy@gmail.com
+
 icon = photo2shape.png
 
-authorName=Alexander Bruy
-
-tags=photo, shape, vector
+tags = photo, shape, vector
 
 homepage =
 tracker = http://hub.qgis.org/projects/photo2shape
