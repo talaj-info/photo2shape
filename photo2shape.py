@@ -33,11 +33,10 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 
+from __init__ import version as pversion
 import photo2shapedialog
 
-from __init__ import mVersion
-
-import resources
+import resources_rc
 
 class Photo2ShapePlugin( object ):
   def __init__( self, iface ):
@@ -84,15 +83,24 @@ class Photo2ShapePlugin( object ):
     QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
     QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
 
-    self.iface.addPluginToMenu( "Photo2Shape", self.actionRun )
-    self.iface.addPluginToMenu( "Photo2Shape", self.actionAbout )
-
-    self.iface.addToolBarIcon( self.actionRun )
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.addPluginToVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.addVectorToolBarIcon( self.actionRun )
+    else:
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.addPluginToMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.addToolBarIcon( self.actionRun )
 
   def unload( self ):
-    self.iface.removePluginMenu( "Photo2Shape", self.actionRun )
-    self.iface.removePluginMenu( "Photo2Shape", self.actionAbout )
-    self.iface.removeToolBarIcon( self.actionRun )
+    if hasattr( self.iface, "addPluginToVectorMenu" ):
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.removePluginVectorMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.removeVectorToolBarIcon( self.actionRun )
+    else:
+      self.iface.removePluginMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionRun )
+      self.iface.removePluginMenu( QCoreApplication.translate( "Photo2Shape", "Photo2Shape" ), self.actionAbout )
+      self.iface.removeToolBarIcon( self.actionRun )
 
   def about( self ):
     dlgAbout = QDialog()
@@ -101,7 +109,7 @@ class Photo2ShapePlugin( object ):
     title = QLabel( QApplication.translate( "Photo2Shape", "<b>Photo2Shape</b>" ) )
     title.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( title )
-    version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( mVersion ) )
+    version = QLabel( QApplication.translate( "Photo2Shape", "Version: %1" ).arg( pversion() ) )
     version.setAlignment( Qt.AlignHCenter | Qt.AlignVCenter )
     lines.addWidget( version )
     lines.addWidget( QLabel( QApplication.translate( "Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images" ) ) )

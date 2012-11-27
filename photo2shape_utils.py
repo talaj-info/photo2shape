@@ -60,7 +60,7 @@ def setLastPhotosDir( path ):
 
 def addToCanvas():
   settings = QSettings()
-  return settings.value( "/photo2shape/addToCanvas", QVariant( False ) ).toInt()[ 0 ]
+  return settings.value( "/photo2shape/addToCanvas", QVariant( True ) ).toBool()
 
 def setAddToCanvas( state ):
   settings = QSettings()
