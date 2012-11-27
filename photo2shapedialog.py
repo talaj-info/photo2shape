@@ -56,7 +56,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     self.manageGui()
 
   def manageGui( self ):
-    self.addToCanvasCheck.setCheckState( utils.addToCanvas() )
+    self.addToCanvasCheck.setChecked( utils.addToCanvas() )
 
   def selectInputDir( self ):
     inputDir = QFileDialog.getExistingDirectory( self,
@@ -101,7 +101,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
     self.outputFileEdit.setText( outputFile.first() )
 
   def reject( self ):
-    utils.setAddToCanvas( self.addToCanvasCheck.checkState() )
+    utils.setAddToCanvas( self.addToCanvasCheck.isChecked() )
 
     QDialog.reject( self )
 
@@ -120,6 +120,7 @@ class Photo2ShapeDialog( QDialog, Ui_Photo2ShapeDialog ):
         QMessageBox.warning( self, self.tr( "Delete error" ), self.tr( "Can't delete file %1" ).arg( outFileName ) )
         return
 
+    utils.setAddToCanvas( self.addToCanvasCheck.isChecked() )
     baseDir = self.inputDirEdit.text()
 
     QApplication.setOverrideCursor( QCursor( Qt.WaitCursor ) )
