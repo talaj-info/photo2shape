@@ -106,7 +106,7 @@ class Photo2ShapePlugin(object):
     title = QLabel(QApplication.translate("Photo2Shape", "<b>Photo2Shape</b>"))
     title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
     lines.addWidget(title)
-    version = QLabel(QApplication.translate("Photo2Shape", "Version: %1").arg(version))
+    version = QLabel(QApplication.translate("Photo2Shape", "Version: %s") % (version))
     version.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
     lines.addWidget(version)
     lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images")))
@@ -123,9 +123,9 @@ class Photo2ShapePlugin(object):
 
     localeShortName = localeFullName[0:2]
     if localeShortName in ["ru", "uk"]:
-      link = QLabel("<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>")
+      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
     else:
-      link = QLabel("<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>")
+      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
 
     link.setOpenExternalLinks(True)
     lines.addWidget(link)
