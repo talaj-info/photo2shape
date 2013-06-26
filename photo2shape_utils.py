@@ -8,7 +8,7 @@
 #
 # Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
-# Copyright (C) 2010 Alexander Bruy (alexander.bruy@gmail.com)
+# Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
 # This source is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -32,36 +32,36 @@ from PyQt4.QtGui import *
 
 def lastShapefileDir():
   settings = QSettings()
-  lastProjectDir = settings.value( "/UI/lastProjectDir", QVariant( "." ) ).toString()
-  return settings.value( "/photo2shape/lastShapeDir", QVariant( lastProjectDir ) ).toString()
+  lastProjectDir = settings.value("/UI/lastProjectDir", ".")
+  return settings.value("/photo2shape/lastShapeDir", lastProjectDir)
 
-def setLastShapefileDir( path ):
+def setLastShapefileDir(path):
   settings = QSettings()
-  fileInfo = QFileInfo( path )
+  fileInfo = QFileInfo(path)
   if fileInfo.isDir():
     lastDir = fileInfo.filePath()
   else:
     lastDir = fileInfo.path()
-  settings.setValue( "/photo2shape/lastShapeDir", QVariant( lastDir ) )
+  settings.setValue("/photo2shape/lastShapeDir", lastDir)
 
 def lastPhotosDir():
   settings = QSettings()
-  lastProjectDir = settings.value( "/UI/lastProjectDir", QVariant( "." ) ).toString()
-  return settings.value( "/photo2shape/lastPhotosDir", QVariant( lastProjectDir ) ).toString()
+  lastProjectDir = settings.value("/UI/lastProjectDir", ".")
+  return settings.value("/photo2shape/lastPhotosDir", lastProjectDir)
 
-def setLastPhotosDir( path ):
+def setLastPhotosDir(path):
   settings = QSettings()
-  fileInfo = QFileInfo( path )
+  fileInfo = QFileInfo(path)
   if fileInfo.isDir():
     lastDir = fileInfo.filePath()
   else:
     lastDir = fileInfo.path()
-  settings.setValue( "/photo2shape/lastPhotosDir", QVariant( lastDir ) )
+  settings.setValue("/photo2shape/lastPhotosDir", lastDir)
 
 def addToCanvas():
   settings = QSettings()
-  return settings.value( "/photo2shape/addToCanvas", QVariant( True ) ).toBool()
+  return bool(settings.value("/photo2shape/addToCanvas", True))
 
-def setAddToCanvas( state ):
+def setAddToCanvas(state):
   settings = QSettings()
-  settings.setValue( "/photo2shape/addToCanvas", QVariant( state ) )
+  settings.setValue("/photo2shape/addToCanvas", state)
