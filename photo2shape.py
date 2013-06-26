@@ -123,9 +123,9 @@ class Photo2ShapePlugin(object):
 
     localeShortName = localeFullName[0:2]
     if localeShortName in ["ru", "uk"]:
-      link = QLabel("<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>")
+      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
     else:
-      link = QLabel("<a href=\"http://gis-lab.info/qa/photo2shape.html\">http://gis-lab.info/qa/photo2shape.html</a>")
+      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
 
     link.setOpenExternalLinks(True)
     lines.addWidget(link)
