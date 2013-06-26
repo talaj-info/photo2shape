@@ -8,7 +8,7 @@
 #
 # Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
-# Copyright (C) 2010 Alexander Bruy (alexander.bruy@gmail.com)
+# Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
 # This source is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -27,30 +27,6 @@
 #
 #******************************************************************************
 
-def name():
-  return "Photo2Shape"
-
-def description():
-  return "Create a point shapefile from a set of geotagged images"
-
-def category():
-  return "Vector"
-
-def version():
-  return "0.1.24"
-
-def qgisMinimumVersion():
-  return "1.0"
-
-def author():
-  return "Alexander Bruy"
-
-def email():
-  return "alexander.bruy@gmail.com"
-
-def icon():
-  return "photo2shape.png"
-
-def classFactory( iface ):
+def classFactory(iface):
   from photo2shape import Photo2ShapePlugin
-  return Photo2ShapePlugin( iface )
+  return Photo2ShapePlugin(iface)
