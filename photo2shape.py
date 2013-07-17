@@ -95,47 +95,10 @@ class Photo2ShapePlugin(object):
         self.iface.removePluginVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionAbout)
         self.iface.removeVectorToolBarIcon(self.actionRun)
 
-    def about(self):
-        cfg = ConfigParser.SafeConfigParser()
-        cfg.read(os.path.join(os.path.dirname(__file__), "metadata.txt"))
-        version = cfg.get("general", "version")
-
-        dlgAbout = QDialog()
-        dlgAbout.setWindowTitle(QApplication.translate("Photo2Shape", "About Photo2Shape", "Window title"))
-        lines = QVBoxLayout(dlgAbout)
-        title = QLabel(QApplication.translate("Photo2Shape", "<b>Photo2Shape</b>"))
-        title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        lines.addWidget(title)
-        version = QLabel(QApplication.translate("Photo2Shape", "Version: %s") % (version))
-        version.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        lines.addWidget(version)
-        lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images")))
-        lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "<b>Developers:</b>")))
-        lines.addWidget(QLabel("  Tim Sutton"))
-        lines.addWidget(QLabel("  Alexander Bruy"))
-        lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "<b>Homepage:</b>")))
-
-        overrideLocale = QSettings().value("locale/overrideFlag", False)
-        if not overrideLocale:
-            localeFullName = QLocale.system().name()
-        else:
-            localeFullName = QSettings().value("locale/userLocale", "")
-
-        localeShortName = localeFullName[0:2]
-        if localeShortName in ["ru", "uk"]:
-            link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
-        else:
-            link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
-
-        link.setOpenExternalLinks(True)
-        lines.addWidget(link)
-
-        btnClose = QPushButton(QApplication.translate("Photo2Shape", "Close"))
-        lines.addWidget(btnClose)
-        btnClose.clicked.connect(dlgAbout.close)
-
-        dlgAbout.exec_()
-
     def run(self):
         dlg = photo2shapedialog.Photo2ShapeDialog()
         dlg.exec_()
+
+    def about(self):
+        d = aboutdialog.AboutDialog()
+        d.exec_()
