@@ -6,7 +6,7 @@
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images
 #
-# Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
+# Based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
@@ -27,6 +27,7 @@
 #
 #******************************************************************************
 
+
 def classFactory(iface):
-  from photo2shape import Photo2ShapePlugin
-  return Photo2ShapePlugin(iface)
+    from photo2shape import Photo2ShapePlugin
+    return Photo2ShapePlugin(iface)
