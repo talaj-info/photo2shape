@@ -1,7 +1,7 @@
 <RCC>
   <qresource>
-    <file>photo2shape.png</file>
-    <file>about.png</file>
+    <file>icons/photo2shape.png</file>
+    <file>icons/about.png</file>
   </qresource>
 </RCC>
 

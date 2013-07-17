@@ -40,7 +40,7 @@ import EXIF
 
 import photo2shape_utils as utils
 
-from ui_photo2shapedialogbase import Ui_Photo2ShapeDialog
+from ui.ui_photo2shapedialogbase import Ui_Photo2ShapeDialog
 
 
 class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
