@@ -6,7 +6,7 @@
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images
 #
-# Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
+# Based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
@@ -27,41 +27,48 @@
 #
 #******************************************************************************
 
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+
 def lastShapefileDir():
-  settings = QSettings()
-  lastProjectDir = settings.value("/UI/lastProjectDir", ".")
-  return settings.value("/photo2shape/lastShapeDir", lastProjectDir)
+    settings = QSettings()
+    lastProjectDir = settings.value("/UI/lastProjectDir", ".")
+    return settings.value("/photo2shape/lastShapeDir", lastProjectDir)
+
 
 def setLastShapefileDir(path):
-  settings = QSettings()
-  fileInfo = QFileInfo(path)
-  if fileInfo.isDir():
-    lastDir = fileInfo.filePath()
-  else:
-    lastDir = fileInfo.path()
-  settings.setValue("/photo2shape/lastShapeDir", lastDir)
+    settings = QSettings()
+    fileInfo = QFileInfo(path)
+    if fileInfo.isDir():
+        lastDir = fileInfo.filePath()
+    else:
+        lastDir = fileInfo.path()
+    settings.setValue("/photo2shape/lastShapeDir", lastDir)
+
 
 def lastPhotosDir():
-  settings = QSettings()
-  lastProjectDir = settings.value("/UI/lastProjectDir", ".")
-  return settings.value("/photo2shape/lastPhotosDir", lastProjectDir)
+    settings = QSettings()
+    lastProjectDir = settings.value("/UI/lastProjectDir", ".")
+    return settings.value("/photo2shape/lastPhotosDir", lastProjectDir)
+
 
 def setLastPhotosDir(path):
-  settings = QSettings()
-  fileInfo = QFileInfo(path)
-  if fileInfo.isDir():
-    lastDir = fileInfo.filePath()
-  else:
-    lastDir = fileInfo.path()
-  settings.setValue("/photo2shape/lastPhotosDir", lastDir)
+    settings = QSettings()
+    fileInfo = QFileInfo(path)
+    if fileInfo.isDir():
+        lastDir = fileInfo.filePath()
+    else:
+        lastDir = fileInfo.path()
+    settings.setValue("/photo2shape/lastPhotosDir", lastDir)
+
 
 def addToCanvas():
-  settings = QSettings()
-  return bool(settings.value("/photo2shape/addToCanvas", True))
+    settings = QSettings()
+    return bool(settings.value("/photo2shape/addToCanvas", True))
+
 
 def setAddToCanvas(state):
-  settings = QSettings()
-  settings.setValue("/photo2shape/addToCanvas", state)
+    settings = QSettings()
+    settings.setValue("/photo2shape/addToCanvas", state)
