@@ -71,7 +71,7 @@ class Photo2ShapePlugin(object):
         if int(self.qgsVersion) < 10900:
             qgisVersion = self.qgsVersion[0] + "." + self.qgsVersion[2] + "." + self.qgsVersion[3]
             QMessageBox.warning(self.iface.mainWindow(), "Photo2Shape",
-                                QCoreApplication.translate("Photo2Shape", "Quantum GIS version detected: ") + qgisVersion +
+                                QCoreApplication.translate("Photo2Shape", "QGIS version detected: ") + qgisVersion +
                                 QCoreApplication.translate("Photo2Shape", "This version of Photo2Shape requires at least QGIS version 2.0.\nPlugin will not be enabled.")
                                )
             return None
