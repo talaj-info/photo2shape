@@ -1,4 +1,4 @@
-UI_PATH=.
+UI_PATH=ui
 UI_SOURCES=$(wildcard $(UI_PATH)/*.ui)
 UI_FILES=$(patsubst $(UI_PATH)/%.ui, $(UI_PATH)/ui_%.py, $(UI_SOURCES))
 
@@ -35,13 +35,20 @@ $(LANG_FILES): $(LANG_PATH)/%.qm: $(LANG_PATH)/%.ts
 $(RES_FILES): $(RES_PATH)/%_rc.py: $(RES_PATH)/%.qrc
 	pyrcc4 -o $@ $<
 
+pep8:
+	@echo
+	@echo "-----------"
+	@echo "PEP8 issues"
+	@echo "-----------"
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude EXIF.py,resources_rc.py . || true
+
 clean:
 	rm -f $(ALL_FILES)
 	rm -f *.pyc
 	rm -f *.zip
 
 package:
-	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc -x \*~ -x \*.git\*
+	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc \*.ts \*.ui \*.qrc \*.pro \*~ \*.git\* \*Makefile*
 	mv ../photo2shape.zip .
 
 upload:

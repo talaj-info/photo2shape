@@ -6,7 +6,7 @@
 # ---------------------------------------------------------
 # Create a point shapefile from a set of geotagged images.
 #
-# Heavily based on ImagesToShape plugin (C) 2009 by Tim Sutton
+# Based on ImagesToShape plugin (C) 2009 by Tim Sutton
 #
 # Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
 #
@@ -27,8 +27,6 @@
 #
 #******************************************************************************
 
-import os
-import ConfigParser
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -37,105 +35,68 @@ from qgis.core import *
 from qgis.gui import *
 
 import photo2shapedialog
+import aboutdialog
 
 import resources_rc
 
+
 class Photo2ShapePlugin(object):
-  def __init__(self, iface):
-    self.iface = iface
-    self.iface = iface
-    try:
-      self.QgisVersion = unicode(QGis.QGIS_VERSION_INT)
-    except:
-      self.QgisVersion = unicode(QGis.qgisVersion)[0]
+    def __init__(self, iface):
+        self.iface = iface
 
-    # For i18n support
-    userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/photo2shape"
-    systemPluginPath = QgsApplication.prefixPath() + "/python/plugins/photo2shape"
+        self.qgsVersion = unicode(QGis.QGIS_VERSION_INT)
 
-    overrideLocale = QSettings().value("locale/overrideFlag", False)
-    if not overrideLocale:
-      localeFullName = QLocale.system().name()
-    else:
-      localeFullName = QSettings().value("locale/userLocale", "")
+        # For i18n support
+        userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/photo2shape"
+        systemPluginPath = QgsApplication.prefixPath() + "/python/plugins/photo2shape"
 
-    if QFileInfo(userPluginPath).exists():
-      translationPath = userPluginPath + "/i18n/photo2shape_" + localeFullName + ".qm"
-    else:
-      translationPath = systemPluginPath + "/i18n/photo2shape_" + localeFullName + ".qm"
+        overrideLocale = QSettings().value("locale/overrideFlag", False)
+        if not overrideLocale:
+            localeFullName = QLocale.system().name()
+        else:
+            localeFullName = QSettings().value("locale/userLocale", "")
 
-    self.localePath = translationPath
-    if QFileInfo(self.localePath).exists():
-      self.translator = QTranslator()
-      self.translator.load(self.localePath)
-      QCoreApplication.installTranslator(self.translator)
+        if QFileInfo(userPluginPath).exists():
+            translationPath = userPluginPath + "/i18n/photo2shape_" + localeFullName + ".qm"
+        else:
+            translationPath = systemPluginPath + "/i18n/photo2shape_" + localeFullName + ".qm"
 
-  def initGui(self):
-    if int(self.QgisVersion) < 10900:
-      qgisVersion = str(self.QgisVersion[0]) + "." + str(self.QgisVersion[2]) + "." + str(self.QgisVersion[3])
-      QMessageBox.warning(self.iface.mainWindow(), "Photo2Shape",
-                          QCoreApplication.translate("Photo2Shape", "Quantum GIS version detected: ") + unicode(qgisVersion) +
-                          QCoreApplication.translate("Photo2Shape", "This version of Photo2Shape requires at least QGIS version 2.0.\nPlugin will not be enabled."))
-      return None
+        self.localePath = translationPath
+        if QFileInfo(self.localePath).exists():
+            self.translator = QTranslator()
+            self.translator.load(self.localePath)
+            QCoreApplication.installTranslator(self.translator)
 
-    self.actionRun = QAction(QIcon(":/photo2shape.png"), "Photo2Shape", self.iface.mainWindow())
-    self.actionRun.setStatusTip(QCoreApplication.translate("Photo2Shape", "Create a point shapefile from a set of geotagged images"))
-    self.actionRun.setWhatsThis(QCoreApplication.translate("Photo2Shape", "Create a point shapefile from a set of geotagged images"))
-    self.actionAbout = QAction(QIcon(":/about.png"), "About", self.iface.mainWindow())
+    def initGui(self):
+        if int(self.qgsVersion) < 10900:
+            qgisVersion = self.qgsVersion[0] + "." + self.qgsVersion[2] + "." + self.qgsVersion[3]
+            QMessageBox.warning(self.iface.mainWindow(), "Photo2Shape",
+                                QCoreApplication.translate("Photo2Shape", "QGIS version detected: ") + qgisVersion +
+                                QCoreApplication.translate("Photo2Shape", "This version of Photo2Shape requires at least QGIS version 2.0.\nPlugin will not be enabled.")
+                               )
+            return None
 
-    self.actionRun.triggered.connect(self.run)
-    self.actionAbout.triggered.connect(self.about)
+        self.actionRun = QAction(QIcon(":/icons/photo2shape.png"), "Photo2Shape", self.iface.mainWindow())
+        self.actionRun.setStatusTip(QCoreApplication.translate("Photo2Shape", "Create a point shapefile from a set of geotagged images"))
+        self.actionRun.setWhatsThis(QCoreApplication.translate("Photo2Shape", "Create a point shapefile from a set of geotagged images"))
+        self.actionAbout = QAction(QIcon(":/icons/about.png"), "About", self.iface.mainWindow())
 
-    self.iface.addPluginToVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionRun)
-    self.iface.addPluginToVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionAbout)
-    self.iface.addVectorToolBarIcon(self.actionRun)
+        self.actionRun.triggered.connect(self.run)
+        self.actionAbout.triggered.connect(self.about)
 
-  def unload(self):
-    self.iface.removePluginVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionRun)
-    self.iface.removePluginVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionAbout)
-    self.iface.removeVectorToolBarIcon(self.actionRun)
+        self.iface.addPluginToVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionRun)
+        self.iface.addPluginToVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionAbout)
+        self.iface.addVectorToolBarIcon(self.actionRun)
 
-  def about(self):
-    cfg = ConfigParser.SafeConfigParser()
-    cfg.read(os.path.join(os.path.dirname(__file__), "metadata.txt"))
-    version = cfg.get("general", "version")
+    def unload(self):
+        self.iface.removePluginVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionRun)
+        self.iface.removePluginVectorMenu(QCoreApplication.translate("Photo2Shape", "Photo2Shape"), self.actionAbout)
+        self.iface.removeVectorToolBarIcon(self.actionRun)
 
-    dlgAbout = QDialog()
-    dlgAbout.setWindowTitle(QApplication.translate("Photo2Shape", "About Photo2Shape", "Window title"))
-    lines = QVBoxLayout(dlgAbout)
-    title = QLabel(QApplication.translate("Photo2Shape", "<b>Photo2Shape</b>"))
-    title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-    lines.addWidget(title)
-    version = QLabel(QApplication.translate("Photo2Shape", "Version: %s") % (version))
-    version.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-    lines.addWidget(version)
-    lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "This plugin creates a point shapefile\nfrom a set of geotagged images")))
-    lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "<b>Developers:</b>")))
-    lines.addWidget(QLabel("  Tim Sutton"))
-    lines.addWidget(QLabel("  Alexander Bruy"))
-    lines.addWidget(QLabel(QApplication.translate("Photo2Shape", "<b>Homepage:</b>")))
+    def run(self):
+        dlg = photo2shapedialog.Photo2ShapeDialog()
+        dlg.exec_()
 
-    overrideLocale = QSettings().value("locale/overrideFlag", False)
-    if not overrideLocale:
-      localeFullName = QLocale.system().name()
-    else:
-      localeFullName = QSettings().value("locale/userLocale", "")
-
-    localeShortName = localeFullName[0:2]
-    if localeShortName in ["ru", "uk"]:
-      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
-    else:
-      link = QLabel("<a href=\"http://hub.qgis.org/projects/photo2shape\">http://hub.qgis.org/projects/photo2shape</a>")
-
-    link.setOpenExternalLinks(True)
-    lines.addWidget(link)
-
-    btnClose = QPushButton(QApplication.translate("Photo2Shape", "Close"))
-    lines.addWidget(btnClose)
-    btnClose.clicked.connect(dlgAbout.close)
-
-    dlgAbout.exec_()
-
-  def run(self):
-    dlg = photo2shapedialog.Photo2ShapeDialog()
-    dlg.exec_()
+    def about(self):
+        d = aboutdialog.AboutDialog()
+        d.exec_()

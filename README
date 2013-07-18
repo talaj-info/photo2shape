@@ -1,0 +1,6 @@
+Photo2Shape
+-----------
+Creates point shapefile from a set of geotagged photos.
+
+Plugin creates point shapefile from a set of geotagged photos by extracting GPS
+coordinates from EXIF tags.
