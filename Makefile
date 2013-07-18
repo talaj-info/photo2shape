@@ -40,7 +40,7 @@ pep8:
 	@echo "-----------"
 	@echo "PEP8 issues"
 	@echo "-----------"
-	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude pydev,third_party,EXIF.py,resources_rc.py . || true
+	@pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude EXIF.py,resources_rc.py . || true
 
 clean:
 	rm -f $(ALL_FILES)
@@ -48,7 +48,7 @@ clean:
 	rm -f *.zip
 
 package:
-	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc -x \*~ -x \*.git\*
+	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc \*.ts \*.ui \*.qrc \*.pro \*~ \*.git\* \*Makefile*
 	mv ../photo2shape.zip .
 
 upload:

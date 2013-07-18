@@ -42,6 +42,8 @@ import importthread
 
 from ui.ui_photo2shapedialogbase import Ui_Photo2ShapeDialog
 
+import resources_rc
+
 
 class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
     def __init__(self):
@@ -206,11 +208,6 @@ class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
                                )
 
     def writeQml(self):
-        if not QFile(self.outputFileEdit.text()).exists():
-            return
-
-        sourceQml = os.path.join(os.path.dirname(__file__), "photos.qml")
-        sourceFile = QFile(sourceQml)
         outputQml = self.outputFileEdit.text().replace(".shp", ".qml")
         outputFile = QFile(outputQml)
         if outputFile.exists():
@@ -223,8 +220,9 @@ class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
                 return
             outputFile.remove()
 
-        if not sourceFile.copy(outputQml):
-            QMessageBox.warning(self,
-                                self.tr("QML error"),
-                                self.tr("Can't write QML file")
-                               )
+        templateFile = QFile(":/resources/photos.qml")
+        if templateFile.open(QIODevice.ReadOnly):
+            if outputFile.open(QIODevice.WriteOnly):
+                outputFile.write(templateFile.readAll())
+            outputFile.close()
+        templateFile.close()

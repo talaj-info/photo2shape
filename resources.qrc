@@ -2,6 +2,7 @@
   <qresource>
     <file>icons/photo2shape.png</file>
     <file>icons/about.png</file>
+    <file>resources/photos.qml</file>
   </qresource>
 </RCC>
 
