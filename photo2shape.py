@@ -38,6 +38,7 @@ from qgis.core import *
 from qgis.gui import *
 
 import photo2shapedialog
+import aboutdialog
 
 import resources_rc
 
