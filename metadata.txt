@@ -8,7 +8,7 @@ qgisMinimumVersion=2.0
 author=Alexander Bruy
 email=alexander.bruy@gmail.com
 
-icon=photo2shape.png
+icon=icons/photo2shape.png
 
 tags=photo,shape,vector
 
