@@ -7,6 +7,6 @@ SOURCES = __init__.py \
 FORMS = ui/photo2shapedialogbase.ui \
         ui/aboutdialogbase.ui
 
-TRANSLATIONS = i18n/photo2shape_ru_RU.ts \
-               i18n/photo2shape_uk_UA.ts \
-               i18n/photo2shape_fr_FR.ts
+TRANSLATIONS = i18n/photo2shape_ru.ts \
+               i18n/photo2shape_uk.ts \
+               i18n/photo2shape_fr.ts
