@@ -210,32 +210,59 @@ class ImportThread(QThread):
         if lonDegrees.find("/") == -1:
             myLonDegrees = lonDegreesFloat
         else:
-            myLonDegrees = lonDegreesFloat / float(regexp.search(str(lonDegrees)).group())
+            if lonDegreesFloat != 0.0:
+                myLonDegrees = lonDegreesFloat / float(regexp.search(str(lonDegrees)).group())
+            else:
+                myLonDegrees = 0.0
         if lonMinutes.find("/") == -1:
             myLonMinutes = lonMinutesFloat
         else:
-            myLonMinutes = lonMinutesFloat / float(regexp.search(str(lonMinutes)).group())
+            if lonMinutesFloat != 0.0:
+                myLonMinutes = lonMinutesFloat / float(regexp.search(str(lonMinutes)).group())
+            else:
+                myLonMinutes = 0.0
         if lonSeconds.find("/") == -1:
             myLonSeconds = lonSecondsFloat
         else:
-            myLonSeconds = lonSecondsFloat / float(regexp.search(str(lonSeconds)).group())
+            if lonSecondsFloat != 0.0:
+                myLonSeconds = lonSecondsFloat / float(regexp.search(str(lonSeconds)).group())
+            else:
+                myLonSeconds = 0.0
 
         if latDegrees.find("/") == -1:
             myLatDegrees = latDegreesFloat
         else:
-            myLatDegrees = latDegreesFloat / float(regexp.search(str(latDegrees)).group())
+            if latDegreesFloat != 0.0:
+                myLatDegrees = latDegreesFloat / float(regexp.search(str(latDegrees)).group())
+            else:
+                myLatDegrees = 0.0
         if latMinutes.find("/") == -1:
             myLatMinutes = latMinutesFloat
         else:
-            myLatMinutes = latMinutesFloat / float(regexp.search(str(latMinutes)).group())
+            if latMinutesFloat != 0.0:
+                myLatMinutes = latMinutesFloat / float(regexp.search(str(latMinutes)).group())
+            else:
+                myLatMinutes = 0.0
         if latSeconds.find("/") == -1:
             myLatSeconds = latSecondsFloat
         else:
-            myLatSeconds = latSecondsFloat / float(regexp.search(str(latSeconds)).group())
+            if latSecondsFloat != 0.0:
+                myLatSeconds = latSecondsFloat / float(regexp.search(str(latSeconds)).group())
+            else:
+                myLatSeconds = 0.0
 
         # we now have degrees, decimal minutes and decimal seconds, so convert to decimal degrees
-        lon = round(myLonDegrees + (myLonMinutes / 60) + (myLonSeconds / 3600), 7)
-        lat = round(myLatDegrees + (myLatMinutes / 60) + (myLatSeconds / 3600), 7)
+        if myLonMinutes != 0.0:
+            myLonMinutes = myLonMinutes / 60
+        if myLonSeconds != 0.0:
+            myLonSeconds = myLonSeconds / 3600
+        if myLatMinutes != 0.0:
+            myLatMinutes = myLatMinutes / 60
+        if myLonSeconds != 0.0:
+            myLatSeconds = myLatSeconds / 3600
+
+        lon = round(myLonDegrees + myLonMinutes + myLonSeconds, 7)
+        lat = round(myLatDegrees + myLatMinutes + myLatSeconds, 7)
 
         # use a negative sign as needed
         if lonDirection == "W":
@@ -274,7 +301,10 @@ class ImportThread(QThread):
         if altitude.find("/") == -1:
             myAltitude = altitudeFloat
         else:
-            myAltitude = altitudeFloat / float(regexp.search(str(altitude)).group())
+            if altitudeFloat != 0.0:
+                myAltitude = altitudeFloat / float(regexp.search(str(altitude)).group())
+            else:
+                myAltitude = 0.0
 
         # use negative sign as needed
         if altDirection == 1:
