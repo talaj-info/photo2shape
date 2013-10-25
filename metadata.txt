@@ -2,7 +2,7 @@
 name=Photo2Shape
 description=Create a point shapefile from a set of geotagged images
 category=Vector
-version=0.2.1
+version=0.2.2
 qgisMinimumVersion=2.0
 
 author=Alexander Bruy
