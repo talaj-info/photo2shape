@@ -44,7 +44,7 @@ pep8:
 
 clean:
 	rm -f $(ALL_FILES)
-	rm -f *.pyc
+	find -name "*.pyc" -exec rm -f {} \;
 	rm -f *.zip
 
 package:
