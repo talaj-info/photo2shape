@@ -1,31 +1,29 @@
 # -*- coding: utf-8 -*-
 
-#******************************************************************************
-#
-# Photo2Shape
-# ---------------------------------------------------------
-# Create a point shapefile from a set of geotagged images.
-#
-# Based on ImagesToShape plugin (C) 2009 by Tim Sutton
-#
-# Copyright (C) 2010-2013 Alexander Bruy (alexander.bruy@gmail.com)
-#
-# This source is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
-# any later version.
-#
-# This code is distributed in the hope that it will be useful, but WITHOUT ANY
-# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-# details.
-#
-# A copy of the GNU General Public License is available on the World Wide Web
-# at <http://www.gnu.org/copyleft/gpl.html>. You can also obtain it by writing
-# to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
-# MA 02111-1307, USA.
-#
-#******************************************************************************
+"""
+***************************************************************************
+    photo2shape_plugin.py
+    ---------------------
+    Date                 : February 2010
+    Copyright            : (C) 2010-2014 by Alexander Bruy
+    Email                : alexander dot bruy at gmail dot com
+***************************************************************************
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+***************************************************************************
+"""
+
+__author__ = 'Alexander Bruy'
+__date__ = 'February 2010'
+__copyright__ = '(C) 2010-2014, Alexander Bruy'
+
+# This will get replaced with a git SHA1 when you do a git archive
+
+__revision__ = '$Format:%H$'
 
 
 from PyQt4.QtCore import *
