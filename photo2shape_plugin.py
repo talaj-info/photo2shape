@@ -34,10 +34,10 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 
-import photo2shapedialog
-import aboutdialog
+from photo2shape.gui.photo2shapedialog import Photo2ShapeDialog
+from photo2shape.gui.aboutdialog import AboutDialog
 
-import resources_rc
+import photo2shape.resources_rc
 
 
 class Photo2ShapePlugin(object):
@@ -94,9 +94,9 @@ class Photo2ShapePlugin(object):
         self.iface.removeVectorToolBarIcon(self.actionRun)
 
     def run(self):
-        dlg = photo2shapedialog.Photo2ShapeDialog()
+        dlg = Photo2ShapeDialog()
         dlg.exec_()
 
     def about(self):
-        d = aboutdialog.AboutDialog()
+        d = AboutDialog()
         d.exec_()

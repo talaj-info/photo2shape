@@ -35,7 +35,7 @@ from PyQt4.QtCore import *
 
 from qgis.core import *
 
-import EXIF
+from photo2shape.EXIF import *
 
 
 class ImportThread(QThread):
@@ -80,7 +80,7 @@ class ImportThread(QThread):
         for fileName in self.photos:
             path = os.path.abspath(unicode(QFileInfo(self.baseDir + "/" + fileName).absoluteFilePath()))
             photoFile = open(path, "rb")
-            exifTags = EXIF.process_file(photoFile, details=False)
+            exifTags = process_file(photoFile, details=False)
             photoFile.close()
 
             # check for GPS tags. If no tags found, write message to log and skip this file
@@ -163,7 +163,7 @@ class ImportThread(QThread):
 
         # some devices (e.g. with Android 1.6) write tags in non standard way
         # as decimal degrees in ASCII field
-        if EXIF.FIELD_TYPES[exifTags["GPS GPSLongitude"].field_type][2] == 'ASCII':
+        if FIELD_TYPES[exifTags["GPS GPSLongitude"].field_type][2] == 'ASCII':
             strLon = str(exifTags["GPS GPSLongitude"])
             strLat = str(exifTags["GPS GPSLatitude"])
             lon = round(float(strLon), 7)
@@ -281,7 +281,7 @@ class ImportThread(QThread):
         # some devices (e.g. with Android 1.6) write tags in non standard way
         # as decimal degrees in ASCII field also they don't write
         # GPS GPSAltitudeRef tag
-        if EXIF.FIELD_TYPES[exifTags["GPS GPSAltitude"].field_type][2] == 'ASCII':
+        if FIELD_TYPES[exifTags["GPS GPSAltitude"].field_type][2] == 'ASCII':
             alt = str(exifTags["GPS GPSAltitude"])
             return round(float(alt), 7)
 
@@ -323,7 +323,7 @@ class ImportThread(QThread):
 
         if "GPS GPSTimeStamp" in exifTags:
             # some devices (e.g. Android) save this tag in non-standard way
-            if EXIF.FIELD_TYPES[exifTags["GPS GPSTimeStamp"].field_type][2] == 'ASCII':
+            if FIELD_TYPES[exifTags["GPS GPSTimeStamp"].field_type][2] == 'ASCII':
                 return str(exifTags["GPS GPSTimeStamp"])
             else:
                 tmp = str(exifTags["GPS GPSTimeStamp"])[1:-1].split(", ")

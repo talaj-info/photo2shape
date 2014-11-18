@@ -36,13 +36,12 @@ from qgis.gui import *
 
 import os.path
 import re
-import EXIF
 
-import importthread
+from photo2shape.importthread import ImportThread
 
-from ui.ui_photo2shapedialogbase import Ui_Photo2ShapeDialog
+from photo2shape.ui.ui_photo2shapedialogbase import Ui_Photo2ShapeDialog
 
-import resources_rc
+import photo2shape.resources_rc
 
 
 class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
@@ -140,11 +139,11 @@ class Photo2ShapeDialog(QDialog, Ui_Photo2ShapeDialog):
         self.settings.setValue("addToCanvas", self.addToCanvasCheck.isChecked())
         baseDir = self.inputDirEdit.text()
 
-        self.workThread = importthread.ImportThread(baseDir,
-                                                    self.inputFiles,
-                                                    outFileName,
-                                                    self.outputEncoding
-                                                   )
+        self.workThread = ImportThread(baseDir,
+                                       self.inputFiles,
+                                       outFileName,
+                                       self.outputEncoding
+                                      )
         self.workThread.photoProcessed.connect(self.photoProcessed)
         self.workThread.processingFinished.connect(self.processingFinished)
         self.workThread.processingInterrupted.connect(self.processingInterrupted)
