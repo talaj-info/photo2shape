@@ -29,5 +29,5 @@
 
 
 def classFactory(iface):
-    from photo2shape import Photo2ShapePlugin
+    from photo2shape.photo2shape_plugin import Photo2ShapePlugin
     return Photo2ShapePlugin(iface)

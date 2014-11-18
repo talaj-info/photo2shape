@@ -34,9 +34,9 @@ import ConfigParser
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from ui.ui_aboutdialogbase import Ui_Dialog
+from photo2shape.ui.ui_aboutdialogbase import Ui_Dialog
 
-import resources_rc
+import photo2shape.resources_rc
 
 
 class AboutDialog(QDialog, Ui_Dialog):
@@ -47,7 +47,8 @@ class AboutDialog(QDialog, Ui_Dialog):
         self.btnHelp = self.buttonBox.button(QDialogButtonBox.Help)
 
         cfg = ConfigParser.SafeConfigParser()
-        cfg.read(os.path.join(os.path.dirname(__file__), "metadata.txt"))
+        cfg.read(os.path.join(
+            os.path.split(os.path.dirname(__file__))[0], 'metadata.txt'))
         version = cfg.get("general", "version")
 
         self.lblLogo.setPixmap(QPixmap(":/icons/photo2shape.png"))
