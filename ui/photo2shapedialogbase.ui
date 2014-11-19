@@ -56,7 +56,7 @@
     <widget class="QLineEdit" name="lePhotosPath"/>
    </item>
    <item row="5" column="0" colspan="3">
-    <widget class="QCheckBox" name="chkAddToCanvas">
+    <widget class="QCheckBox" name="chkLoadLayer">
      <property name="text">
       <string>Add result to canvas</string>
      </property>

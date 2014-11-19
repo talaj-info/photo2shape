@@ -84,7 +84,6 @@ class PhotoImporter(QObject):
         ft = QgsFeature()
         ft.setFields(fields)
         for count, fName in enumerate(photos):
-            print fName
             with open(fName, 'rb') as imgFile:
                 tags = exifread.process_file(imgFile, details=False)
 
@@ -95,6 +94,11 @@ class PhotoImporter(QObject):
 
             # Start processing tags
             longitude, latitude = self._extractCoordinates(tags)
+            if longitude is None:
+                # TODO: add message to log
+                self.photoProcessed.emit(int(count * total))
+                continue
+
             altitude = self._extractAltitude(tags)
             north, azimuth = self._extractDirection(tags)
             gpsDate = self._extracrGPSDateTime(tags)
@@ -157,6 +161,9 @@ class PhotoImporter(QObject):
             return lon, lat
 
         # Try to extract coordinates in usual EXIF format
+        # Sometimes tags present by filled with zeros
+        if tags['GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
+            return None, None
 
         # Longitude direction will be either "E" or "W"
         lonDirection = tags['GPS GPSLongitudeRef'].printable
@@ -200,7 +207,7 @@ class PhotoImporter(QObject):
         dataType = tags['GPS GPSAltitude'].field_type
         typeName = exifread.tags.FIELD_TYPES[dataType][2]
         if typeName == 'ASCII':
-            altitude = exifTags['GPS GPSAltitude'].values
+            altitude = tags['GPS GPSAltitude'].values
             return round(float(altitude), 7)
 
         if 'GPS GPSAltitudeRef' not in tags:
@@ -219,7 +226,7 @@ class PhotoImporter(QObject):
 
     def _extractDirection(self, tags):
         if 'GPS GPSImgDirection' not in tags:
-            return None
+            return None, None
 
         # Reference will be either "T" or "M"
         reference = tags['GPS GPSImgDirectionRef'].values

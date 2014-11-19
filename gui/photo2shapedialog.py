@@ -67,8 +67,17 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.manageGui()
 
     def manageGui(self):
-        self.chkAddToCanvas.setChecked(
-            self.settings.value('addToCanvas', True, bool))
+        self.chkRecurse.setChecked(self.settings.value('recurse', True, bool))
+        self.chkAppend.setChecked(self.settings.value('append', True, bool))
+        self.chkLoadLayer.setChecked(
+            self.settings.value('loadLayer', True, bool))
+
+    def closeEvent(self, event):
+        self.settings.setValue('recurse', self.chkRecurse.isChecked())
+        self.settings.setValue('append', self.chkAppend.isChecked())
+        self.settings.setValue('loadLayer', self.chkLoadLayer.isChecked())
+
+        QDialog.closeEvent(self, e)
 
     def selectDirectory(self):
         lastDir = self.settings.value('lastPhotosDir', '.')
@@ -123,14 +132,6 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
                         'output file and try again.'))
             return
 
-        #~ outFile = QFile(outFileName)
-        #~ if outFile.exists():
-            #~ if not QgsVectorFileWriter.deleteShapeFile(outFileName):
-                #~ QMessageBox.warning(
-                    #~ self, self.tr("Delete error"),
-                    #~ self.tr("Can't delete file %s") % outFileName)
-                #~ return
-
         self.importer.setPhotosDirectory(dirName)
         self.importer.setOutputPath(fileName)
         self.importer.setEncoding(self.encoding)
@@ -147,76 +148,24 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
     def importCompleted(self):
         self.thread.started.disconnect()
+        self.progressBar.setValue(0)
+
+        if self.chkAddToCanvas.isChecked():
+            self.loadLayer()
+
         self.iface.messageBar().pushMessage(self.tr('Import completed'),
             QgsMessageBar.INFO, self.iface.messageTimeout())
-        self.progressBar.setValue(0)
         self.btnOk.setEnabled(True)
         self.btnClose.setEnabled(True)
 
-    #~ def processingFinished(self, errorsList, hasOutput):
-        #~ self.stopProcessing()
-#~
-        #~ if not hasOutput:
-            #~ QMessageBox.warning(self,
-                                #~ self.tr("Photo2Shape"),
-                                #~ self.tr("There are no geotagged photos in selected directory.\nShapefile was not created.")
-                               #~ )
-            #~ self.restoreGUI()
-            #~ return
-#~
-        #~ if len(errorsList) > 0:
-            #~ msg = self.tr("The following files were not added to shapefile because of errors: <br><br>") + "<br><br>".join(errorsList)
-            #~ dlgError = QErrorMessage(self)
-            #~ dlgError.showMessage(msg)
-#~
-        #~ self.writeQml()
-        #~ if self.addToCanvasCheck.isChecked():
-            #~ self.addLayerToCanvas()
-#~
-        #~ self.restoreGUI()
-#~
-    #~ def processingInterrupted(self):
-        #~ self.restoreGUI()
-#~
-    #~ def stopProcessing(self):
-        #~ if self.workThread is not None:
-            #~ self.workThread.stop()
-            #~ self.workThread = None
-#~
-    #~ def restoreGUI(self):
-        #~ self.progressBar.setValue(0)
-        #~ self.buttonBox.rejected.connect(self.reject)
-        #~ self.btnClose.setText(self.tr("Close"))
-        #~ self.btnOk.setEnabled(True)
-#~
-    #~ def addLayerToCanvas(self):
-        #~ layerPath = self.outputFileEdit.text()
-        #~ newLayer = QgsVectorLayer(layerPath, QFileInfo(layerPath).baseName(), "ogr")
-#~
-        #~ if newLayer.isValid():
-            #~ QgsMapLayerRegistry.instance().addMapLayer(newLayer)
-        #~ else:
-            #~ QMessageBox.warning(self,
-                                #~ self.tr("Photo2Shape"),
-                                #~ self.tr("Error loading output shapefile:\n%s") % (layerPath)
-                               #~ )
-#~
-    #~ def writeQml(self):
-        #~ outputQml = self.outputFileEdit.text().replace(".shp", ".qml")
-        #~ outputFile = QFile(outputQml)
-        #~ if outputFile.exists():
-            #~ res = QMessageBox.question(self,
-                                       #~ self.tr("QML exists"),
-                                       #~ self.tr("QML file %s already exists. Overwrite?") % (outputQml),
-                                       #~ QMessageBox.Yes | QMessageBox.No
-                                      #~ )
-            #~ if res != QMessageBox.Yes:
-                #~ return
-            #~ outputFile.remove()
-#~
-        #~ templateFile = QFile(":/resources/photos.qml")
-        #~ if templateFile.open(QIODevice.ReadOnly):
-            #~ if outputFile.open(QIODevice.WriteOnly):
-                #~ outputFile.write(templateFile.readAll())
-            #~ outputFile.close()
-        #~ templateFile.close()
+    def loadLayer(self):
+        fName = self.leOutputShape.text()
+        layer = QgsVectorLayer(fName, QFileInfo(fName).baseName(), 'ogr')
+
+        if layer.isValid():
+            layer.loadNamedStyle(':/resources/photos.qml')
+            QgsMapLayerRegistry.instance().addMapLayer(layer)
+        else:
+            self.iface.messageBar().pushMessage(
+                self.tr('Cannot load output shapefile'),
+                QgsMessageBar.WARNING, self.iface.messageTimeout())
