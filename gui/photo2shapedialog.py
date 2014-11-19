@@ -77,7 +77,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.settings.setValue('append', self.chkAppend.isChecked())
         self.settings.setValue('loadLayer', self.chkLoadLayer.isChecked())
 
-        QDialog.closeEvent(self, e)
+        QDialog.closeEvent(self, event)
 
     def selectDirectory(self):
         lastDir = self.settings.value('lastPhotosDir', '.')
@@ -150,7 +150,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.thread.started.disconnect()
         self.progressBar.setValue(0)
 
-        if self.chkAddToCanvas.isChecked():
+        if self.chkLoadLayer.isChecked():
             self.loadLayer()
 
         self.iface.messageBar().pushMessage(self.tr('Import completed'),

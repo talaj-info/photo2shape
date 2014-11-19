@@ -72,7 +72,8 @@ class PhotoImporter(QObject):
 
         photos = []
         for root, dirs, files in os.walk(self.directory):
-            photos.extend(os.path.join(root, fName) for fName in files if fName.lower().endswith(('.jpg', '.jpeg')))
+            photos.extend(os.path.join(root, fName) for fName in files
+                          if fName.lower().endswith(('.jpg', '.jpeg')))
             if not self.recurse:
                 break
 
