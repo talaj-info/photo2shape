@@ -47,10 +47,10 @@ class AboutDialog(QDialog, Ui_Dialog):
         cfg = ConfigParser.SafeConfigParser()
         cfg.read(os.path.join(
             os.path.split(os.path.dirname(__file__))[0], 'metadata.txt'))
-        version = cfg.get("general", "version")
+        version = cfg.get('general', 'version')
 
         self.lblLogo.setPixmap(QPixmap(":/icons/photo2shape.png"))
-        self.lblVersion.setText(self.tr("Version: %s") % (version))
+        self.lblVersion.setText(self.tr('Version: %s') % version)
         doc = QTextDocument()
         doc.setHtml(self.getAboutText())
         self.textBrowser.setDocument(doc)
@@ -58,26 +58,29 @@ class AboutDialog(QDialog, Ui_Dialog):
 
         self.buttonBox.helpRequested.connect(self.openHelp)
 
-    def reject(self):
-        QDialog.reject(self)
-
     def openHelp(self):
-        overrideLocale = QSettings().value("locale/overrideFlag", False)
+        overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
         if not overrideLocale:
             localeFullName = QLocale.system().name()
         else:
-            localeFullName = QSettings().value("locale/userLocale", "")
+            localeFullName = QSettings().value('locale/userLocale', '')
 
         localeShortName = localeFullName[0:2]
-        if localeShortName in ["ru", "uk"]:
-            QDesktopServices.openUrl(QUrl("http://hub.qgis.org/projects/photo2shape/wiki"))
+        if localeShortName in ['uk']:
+            QDesktopServices.openUrl(
+                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
         else:
-            QDesktopServices.openUrl(QUrl("http://hub.qgis.org/projects/photo2shape/wiki"))
+            QDesktopServices.openUrl(
+                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
 
     def getAboutText(self):
-        return self.tr("""<p>Create point shapefile from a set of geotagged photos.</p>
-                       <p>Inspired by ImagesToShape plugin from Tim Sutton.</p>
-                       <p><strong>Developers</strong>: Alexander Bruy</p>
-                       <p><strong>Homepage</strong>: <a href="http://hub.qgis.org/projects/photo2shape">http://hub.qgis.org/projects/photo2shape</a></p>
-                       <p>Please report bugs at <a href="http://hub.qgis.org/projects/photo2shape/issues">bugtracker</a>.</p>"""
-                      )
+        return self.tr(
+            '<p>Create point shapefile from a set of geotagged photos. '
+            'Inspired by ImagesToShape plugin from Tim Sutton.</p>'
+            '<p><strong>Developers</strong>: Alexander Bruy</p>'
+            '<p><strong>Homepage</strong>: '
+            '<a href="http://hub.qgis.org/projects/photo2shape">'
+            'http://hub.qgis.org/projects/photo2shape</a></p>'
+            '<p>Please report bugs at '
+            '<a href="http://hub.qgis.org/projects/photo2shape/issues">'
+            'bugtracker</a>.</p>')

@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Photo2ShapeDialog</class>
- <widget class="QDialog" name="Photo2ShapeDialog">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>403</width>
-    <height>172</height>
+    <height>217</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Photo2Shape</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="2">
+    <widget class="QPushButton" name="btnSelectInput">
+     <property name="text">
+      <string>Browse...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Output shapefile</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="btnSelectOutput">
+     <property name="text">
+      <string>Browse...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="leOutputShape"/>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -22,47 +53,30 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLineEdit" name="inputDirEdit"/>
+    <widget class="QLineEdit" name="lePhotosPath"/>
    </item>
-   <item row="0" column="2">
-    <widget class="QPushButton" name="btnSelectInputDir">
-     <property name="text">
-      <string>Browse</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Output shapefile</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="outputFileEdit"/>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="btnSelectOutputFile">
-     <property name="text">
-      <string>Browse</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QCheckBox" name="addToCanvasCheck">
+   <item row="5" column="0" colspan="3">
+    <widget class="QCheckBox" name="chkAddToCanvas">
      <property name="text">
       <string>Add result to canvas</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="3">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="value">
-      <number>0</number>
+   <item row="1" column="0" colspan="3">
+    <widget class="QCheckBox" name="chkRecurse">
+     <property name="text">
+      <string>Recurse subdirectories</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1" colspan="2">
+   <item row="4" column="0" colspan="3">
+    <widget class="QCheckBox" name="chkAppend">
+     <property name="text">
+      <string>Append to existing file</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="3">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -79,7 +93,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Photo2ShapeDialog</receiver>
+   <receiver>Dialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -95,7 +109,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Photo2ShapeDialog</receiver>
+   <receiver>Dialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
