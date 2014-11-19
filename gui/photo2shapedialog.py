@@ -60,6 +60,8 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
         self.importer.moveToThread(self.thread)
         self.importer.importError.connect(self.thread.quit)
+        self.importer.importError.connect(self.importCanceled)
+        self.importer.importMessage.connect(self.logMessage)
         self.importer.importFinished.connect(self.thread.quit)
         self.importer.importFinished.connect(self.importCompleted)
         self.importer.photoProcessed.connect(self.updateProgress)
@@ -146,19 +148,21 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
     def updateProgress(self, value):
         self.progressBar.setValue(value)
 
+    def logMessage(self, message, level=QgsMessageLog.INFO):
+        QgsMessageLog.logMessage(message, 'Photo2Shape', level)
+
+    def importCanceled(self, message):
+        self._showMessage(message, QgsMessageBar.WARNING)
+        self._restoreGui()
+
     def importCompleted(self):
-        self.thread.started.disconnect()
-        self.progressBar.setValue(0)
-
+        self._showMessage(self.tr('Import completed'))
         if self.chkLoadLayer.isChecked():
-            self.loadLayer()
+            self._loadLayer()
 
-        self.iface.messageBar().pushMessage(self.tr('Import completed'),
-            QgsMessageBar.INFO, self.iface.messageTimeout())
-        self.btnOk.setEnabled(True)
-        self.btnClose.setEnabled(True)
+        self._restoreGui()
 
-    def loadLayer(self):
+    def _loadLayer(self):
         fName = self.leOutputShape.text()
         layer = QgsVectorLayer(fName, QFileInfo(fName).baseName(), 'ogr')
 
@@ -169,3 +173,13 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
             self.iface.messageBar().pushMessage(
                 self.tr('Cannot load output shapefile'),
                 QgsMessageBar.WARNING, self.iface.messageTimeout())
+
+    def _restoreGui(self):
+        self.thread.started.disconnect()
+        self.progressBar.setValue(0)
+        self.btnOk.setEnabled(True)
+        self.btnClose.setEnabled(True)
+
+    def _showMessage(self, message, level=QgsMessageBar.INFO):
+        self.iface.messageBar().pushMessage(
+            message, level, self.iface.messageTimeout())

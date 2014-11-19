@@ -37,8 +37,9 @@ from qgis.core import *
 class PhotoImporter(QObject):
 
     importError = pyqtSignal(unicode)
-    importFinished = pyqtSignal()
+    importMessage = pyqtSignal(unicode)
     photoProcessed = pyqtSignal(int)
+    importFinished = pyqtSignal()
 
     def __init__(self):
         QObject.__init__(self)
@@ -89,14 +90,16 @@ class PhotoImporter(QObject):
                 tags = exifread.process_file(imgFile, details=False)
 
             if not tags.viewkeys() & {'GPS GPSLongitude', 'GPS GPSLatitude'}:
-                # TODO: add message to log
+                self.importMessage.emit(
+                    self.tr('Skipping file %s: there are no GPS tags in it.') % fName)
                 self.photoProcessed.emit(int(count * total))
                 continue
 
             # Start processing tags
             longitude, latitude = self._extractCoordinates(tags)
             if longitude is None:
-                # TODO: add message to log
+                self.importMessage.emit(
+                    self.tr('Skipping file %s: there are no GPS fix data.') % fName)
                 self.photoProcessed.emit(int(count * total))
                 continue
 
