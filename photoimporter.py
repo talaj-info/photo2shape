@@ -164,7 +164,6 @@ class PhotoImporter(QObject):
             lat = round(float(tags['GPS GPSLatitude'].values), 7)
             return lon, lat
 
-        # Try to extract coordinates in usual EXIF format
         # Sometimes tags present by filled with zeros
         if tags['GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
             return None, None
@@ -230,6 +229,10 @@ class PhotoImporter(QObject):
 
     def _extractDirection(self, tags):
         if 'GPS GPSImgDirection' not in tags:
+            return None, None
+
+        # Sometimes tag present by filled with zeros
+        if tags['GPS GPSImgDirection'].printable == '[0/0, 0/0, 0/0]':
             return None, None
 
         # Reference will be either "T" or "M"
