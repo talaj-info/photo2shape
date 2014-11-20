@@ -2,7 +2,7 @@
 name=Photo2Shape
 description=Create a point shapefile from a set of geotagged images
 category=Vector
-version=0.2.2
+version=0.3.0
 qgisMinimumVersion=2.0
 
 author=Alexander Bruy
@@ -16,5 +16,5 @@ homepage=http://hub.qgis.org/projects/photo2shape
 tracker=http://hub.qgis.org/projects/photo2shape/issues
 repository=https://github.com/alexbruy/photo2shape
 
-experimental=False
+experimental=True
 deprecated=False
