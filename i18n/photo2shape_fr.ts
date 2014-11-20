@@ -3,17 +3,13 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="aboutdialog.py" line="54"/>
+        <location filename="gui/aboutdialog.py" line="53"/>
         <source>Version: %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="aboutdialog.py" line="79"/>
-        <source>&lt;p&gt;Create point shapefile from a set of geotagged photos.&lt;/p&gt;
-                       &lt;p&gt;Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;
-                       &lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;
-                       &lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;
-                       &lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
+        <location filename="gui/aboutdialog.py" line="77"/>
+        <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -47,6 +43,41 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="14"/>
+        <source>Photo2Shape</source>
+        <translation type="unfinished">Photo2Shape</translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="34"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="27"/>
+        <source>Output shapefile</source>
+        <translation type="unfinished">Fichier shape en sortie</translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="51"/>
+        <source>Directory with images</source>
+        <translation type="unfinished">Répertoire des photos</translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="61"/>
+        <source>Add result to canvas</source>
+        <translation type="unfinished">Afficher le résultat</translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="68"/>
+        <source>Recurse subdirectories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/photo2shapedialogbase.ui" line="75"/>
+        <source>Append to existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Photo2Shape</name>
@@ -65,7 +96,7 @@ Le Plugin ne pourra pas être chargé.</translation>
     <message>
         <location filename="photo2shape.py" line="81"/>
         <source>Create a point shapefile from a set of geotagged images</source>
-        <translation>Crée un fichier shape de type point à partir d&apos;e photos géoréférencées</translation>
+        <translation type="obsolete">Crée un fichier shape de type point à partir d&apos;e photos géoréférencées</translation>
     </message>
     <message>
         <location filename="photo2shape.py" line="104"/>
@@ -112,20 +143,31 @@ Plugin will not be enabled.</source>
 Le Plugin ne pourra pas être chargé.</translation>
     </message>
     <message>
-        <location filename="photo2shape.py" line="73"/>
-        <source>This version of Photo2Shape requires at least QGIS version 2.0.
-Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="photo2shape.py" line="93"/>
+        <location filename="photo2shape_plugin.py" line="97"/>
         <source>Photo2Shape</source>
         <translation type="unfinished">Photo2Shape</translation>
     </message>
     <message>
-        <location filename="photo2shape.py" line="73"/>
-        <source>QGIS version detected: </source>
+        <location filename="photo2shape_plugin.py" line="67"/>
+        <source>QGIS %s detected.
+This version of Photo2Shape requires at least QGIS 2.0.
+Plugin will not be enabled.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="76"/>
+        <source>Create a point shapefile from geotagged images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="79"/>
+        <source>About Photo2Shape...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="82"/>
+        <source>About Photo2Shape</source>
+        <translation type="unfinished">à propos</translation>
     </message>
 </context>
 <context>
@@ -133,52 +175,52 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photo2shapedialog.py" line="205"/>
         <source>Photo2Shape</source>
-        <translation>Photo2Shape</translation>
+        <translation type="obsolete">Photo2Shape</translation>
     </message>
     <message>
         <location filename="ui/photo2shapedialogbase.ui" line="20"/>
         <source>Directory with images</source>
-        <translation>Répertoire des photos</translation>
+        <translation type="obsolete">Répertoire des photos</translation>
     </message>
     <message>
         <location filename="ui/photo2shapedialogbase.ui" line="47"/>
         <source>Browse</source>
-        <translation>Parcourir</translation>
+        <translation type="obsolete">Parcourir</translation>
     </message>
     <message>
         <location filename="ui/photo2shapedialogbase.ui" line="37"/>
         <source>Output shapefile</source>
-        <translation>Fichier shape en sortie</translation>
+        <translation type="obsolete">Fichier shape en sortie</translation>
     </message>
     <message>
         <location filename="ui/photo2shapedialogbase.ui" line="54"/>
         <source>Add result to canvas</source>
-        <translation>Afficher le résultat</translation>
+        <translation type="obsolete">Afficher le résultat</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="69"/>
         <source>Select directory with images</source>
-        <translation>Sélectionner le répertoire des photos</translation>
+        <translation type="obsolete">Sélectionner le répertoire des photos</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="82"/>
         <source>No images found</source>
-        <translation>Pas de photo à un format adapté trouvée</translation>
+        <translation type="obsolete">Pas de photo à un format adapté trouvée</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="82"/>
         <source>There are no supported images in this directory. Please select another one.</source>
-        <translation>Il n&apos;y a pas de photo à un format adapté dans ce répertoire, merci d&apos;en choisir un autre.</translation>
+        <translation type="obsolete">Il n&apos;y a pas de photo à un format adapté dans ce répertoire, merci d&apos;en choisir un autre.</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="98"/>
         <source>Select output shapefile</source>
-        <translation>Sélectionner le fichier shape en sortie</translation>
+        <translation type="obsolete">Sélectionner le fichier shape en sortie</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="134"/>
         <source>Delete error</source>
-        <translation>Erreur dans la destruction</translation>
+        <translation type="obsolete">Erreur dans la destruction</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="119"/>
@@ -188,18 +230,18 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photo2shapedialog.py" line="153"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="166"/>
         <source>There are no geotagged photos in selected directory.
 Shapefile was not created.</source>
-        <translation>Il n&apos;y a pas de photo géoréférencée dans ce répertoire, merci d&apos;en choisir un autre.</translation>
+        <translation type="obsolete">Il n&apos;y a pas de photo géoréférencée dans ce répertoire, merci d&apos;en choisir un autre.</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="195"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation type="obsolete">Fermer</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="183"/>
@@ -211,7 +253,7 @@ Shapefile was not created.</source>
     <message>
         <location filename="photo2shapedialog.py" line="214"/>
         <source>QML exists</source>
-        <translation>Le fichier QML existe</translation>
+        <translation type="obsolete">Le fichier QML existe</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="196"/>
@@ -231,39 +273,81 @@ Shapefile was not created.</source>
     <message>
         <location filename="photo2shapedialog.py" line="125"/>
         <source>Wrong output file</source>
-        <translation>Fichier en sotie faux</translation>
+        <translation type="obsolete">Fichier en sotie faux</translation>
     </message>
     <message>
         <location filename="photo2shapedialog.py" line="125"/>
         <source>Output file is improperly defined.
 Please enter a valid filename and try again.</source>
-        <translation>Fichier en sortie mal défini.
+        <translation type="obsolete">Fichier en sortie mal défini.
 Merci d&apos;entrer un nom valide et de réessayer.</translation>
     </message>
     <message>
-        <location filename="photo2shapedialog.py" line="134"/>
-        <source>Can&apos;t delete file %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="photo2shapedialog.py" line="174"/>
-        <source>The following files were not added to shapefile because of errors: &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="photo2shapedialog.py" line="205"/>
-        <source>Error loading output shapefile:
-%s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="photo2shapedialog.py" line="214"/>
-        <source>QML file %s already exists. Overwrite?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="photo2shapedialog.py" line="96"/>
+        <location filename="gui/photo2shapedialog.py" line="97"/>
         <source>ESRI Shapefiles (*.shp *.SHP)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="86"/>
+        <source>Select directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="100"/>
+        <source>Save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <source>Path not set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <source>Path to photos is not set. Please specify directory with photos and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <source>Output file is not set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <source>Output file name is missing. Please specify correct output file and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="159"/>
+        <source>Import completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="173"/>
+        <source>Cannot load output shapefile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PhotoImporter</name>
+    <message>
+        <location filename="photoimporter.py" line="69"/>
+        <source>Unable to open or create layer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="82"/>
+        <source>No images found in directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="93"/>
+        <source>Skipping file %s: there are no GPS tags in it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="101"/>
+        <source>Skipping file %s: there are no GPS fix data.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
