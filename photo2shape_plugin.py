@@ -66,10 +66,8 @@ class Photo2ShapePlugin:
                 + '.' + self.qgsVersion[3]
             QMessageBox.warning(self.iface.mainWindow(), 'Photo2Shape',
                 QCoreApplication.translate('Photo2Shape',
-                    'QGIS %s detected.\n') % (qgisVersion) +
-                    QCoreApplication.translate('Photo2Shape',
-                        'This version of Photo2Shape requires at least '
-                        'QGIS 2.0.\nPlugin will not be enabled.'))
+                    'QGIS %s detected.\nThis version of Photo2Shape requires '
+                    'at least QGIS 2.0.\nPlugin will not be enabled.') % (qgisVersion))
             return None
 
         self.actionRun = QAction(QCoreApplication.translate(
