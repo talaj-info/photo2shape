@@ -17,5 +17,5 @@ homepage=http://hub.qgis.org/projects/photo2shape
 tracker=http://hub.qgis.org/projects/photo2shape/issues
 repository=https://github.com/alexbruy/photo2shape
 
-experimental=True
+experimental=False
 deprecated=False
