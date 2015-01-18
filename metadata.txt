@@ -1,7 +1,7 @@
 [general]
 name=Photo2Shape
 description=Create point shapefile from a set of geotagged images
-about=Analyze geotagged photos/images and create point shapefile from them. Requires exifread package.
+about=Analyze geotagged photos/images and create point shapefile from them. Requires exifread 1.4.x package.
 category=Vector
 version=0.3.0
 qgisMinimumVersion=2.0

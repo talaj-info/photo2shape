@@ -66,6 +66,8 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.importer.importFinished.connect(self.importCompleted)
         self.importer.photoProcessed.connect(self.updateProgress)
 
+        self.thread.started.connect(self.importer.importPhotos)
+
         self.manageGui()
 
     def manageGui(self):
@@ -75,10 +77,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
             self.settings.value('loadLayer', True, bool))
 
     def closeEvent(self, event):
-        self.settings.setValue('recurse', self.chkRecurse.isChecked())
-        self.settings.setValue('append', self.chkAppend.isChecked())
-        self.settings.setValue('loadLayer', self.chkLoadLayer.isChecked())
-
+        self._saveSettings()
         QDialog.closeEvent(self, event)
 
     def selectDirectory(self):
@@ -115,9 +114,12 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
             self.settings.setValue('encoding', encoding)
 
     def reject(self):
+        self._saveSettings()
         QDialog.reject(self)
 
     def accept(self):
+        self._saveSettings()
+
         dirName = self.lePhotosPath.text()
         if dirName == '':
             QMessageBox.warning(self,
@@ -140,7 +142,6 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.importer.setRecurseDirs(self.chkRecurse.isChecked())
         self.importer.setAppendFile(self.chkAppend.isChecked())
 
-        self.thread.started.connect(self.importer.importPhotos)
         self.thread.start()
         self.btnOk.setEnabled(False)
         self.btnClose.setEnabled(False)
@@ -175,7 +176,6 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
                 QgsMessageBar.WARNING, self.iface.messageTimeout())
 
     def _restoreGui(self):
-        self.thread.started.disconnect()
         self.progressBar.setValue(0)
         self.btnOk.setEnabled(True)
         self.btnClose.setEnabled(True)
@@ -183,3 +183,8 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
     def _showMessage(self, message, level=QgsMessageBar.INFO):
         self.iface.messageBar().pushMessage(
             message, level, self.iface.messageTimeout())
+
+    def _saveSettings(self):
+        self.settings.setValue('recurse', self.chkRecurse.isChecked())
+        self.settings.setValue('append', self.chkAppend.isChecked())
+        self.settings.setValue('loadLayer', self.chkLoadLayer.isChecked())
