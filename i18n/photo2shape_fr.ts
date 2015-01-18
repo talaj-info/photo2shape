@@ -283,47 +283,47 @@ Please enter a valid filename and try again.</source>
 Merci d&apos;entrer un nom valide et de réessayer.</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="97"/>
+        <location filename="gui/photo2shapedialog.py" line="96"/>
         <source>ESRI Shapefiles (*.shp *.SHP)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="86"/>
+        <location filename="gui/photo2shapedialog.py" line="85"/>
         <source>Select directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="100"/>
+        <location filename="gui/photo2shapedialog.py" line="99"/>
         <source>Save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <location filename="gui/photo2shapedialog.py" line="125"/>
         <source>Path not set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <location filename="gui/photo2shapedialog.py" line="125"/>
         <source>Path to photos is not set. Please specify directory with photos and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <location filename="gui/photo2shapedialog.py" line="133"/>
         <source>Output file is not set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <location filename="gui/photo2shapedialog.py" line="133"/>
         <source>Output file name is missing. Please specify correct output file and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="159"/>
+        <location filename="gui/photo2shapedialog.py" line="160"/>
         <source>Import completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="173"/>
+        <location filename="gui/photo2shapedialog.py" line="174"/>
         <source>Cannot load output shapefile</source>
         <translation type="unfinished"></translation>
     </message>
@@ -331,23 +331,28 @@ Merci d&apos;entrer un nom valide et de réessayer.</translation>
 <context>
     <name>PhotoImporter</name>
     <message>
-        <location filename="photoimporter.py" line="69"/>
+        <location filename="photoimporter.py" line="75"/>
         <source>Unable to open or create layer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="82"/>
+        <location filename="photoimporter.py" line="89"/>
         <source>No images found in directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="93"/>
+        <location filename="photoimporter.py" line="101"/>
         <source>Skipping file %s: there are no GPS tags in it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="101"/>
+        <location filename="photoimporter.py" line="109"/>
         <source>Skipping file %s: there are no GPS fix data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="64"/>
+        <source>Found exifread %s, but plugin requires exifread 1.4.x.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
