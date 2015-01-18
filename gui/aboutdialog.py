@@ -77,6 +77,8 @@ class AboutDialog(QDialog, Ui_Dialog):
         return self.tr(
             '<p>Create point shapefile from a set of geotagged photos. '
             'Inspired by ImagesToShape plugin from Tim Sutton.</p>'
+            '<p>NOTE: plugin requires 3rd party Python package '
+            'exifread >= 2.0.0</p>'
             '<p><strong>Developers</strong>: Alexander Bruy</p>'
             '<p><strong>Homepage</strong>: '
             '<a href="http://hub.qgis.org/projects/photo2shape">'
