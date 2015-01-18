@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -192,7 +193,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photoimporter.py" line="64"/>
         <source>Found exifread %s, but plugin requires exifread 1.4.x.</source>
-        <translation type="unfinished"></translation>
+        <translation>Знайдено exifread %s, але плаґін працює лише з exifread 1.4.x.</translation>
     </message>
 </context>
 </TS>
