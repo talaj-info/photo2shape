@@ -123,47 +123,47 @@ Plugin will not be enabled.</source>
 <context>
     <name>Photo2ShapeDialog</name>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="97"/>
+        <location filename="gui/photo2shapedialog.py" line="96"/>
         <source>ESRI Shapefiles (*.shp *.SHP)</source>
         <translation>Shape-файли ESRI (*.shp *.SHP)</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="86"/>
+        <location filename="gui/photo2shapedialog.py" line="85"/>
         <source>Select directory</source>
         <translation>Виберіть каталог</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="100"/>
+        <location filename="gui/photo2shapedialog.py" line="99"/>
         <source>Save file</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <location filename="gui/photo2shapedialog.py" line="125"/>
         <source>Path not set</source>
         <translation>Шлях не задано</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="123"/>
+        <location filename="gui/photo2shapedialog.py" line="125"/>
         <source>Path to photos is not set. Please specify directory with photos and try again.</source>
         <translation>Каталог зображень не задано. Будь ласка задайте каталог зображень та спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <location filename="gui/photo2shapedialog.py" line="133"/>
         <source>Output file is not set</source>
         <translation>Вихідний файл не задано</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="131"/>
+        <location filename="gui/photo2shapedialog.py" line="133"/>
         <source>Output file name is missing. Please specify correct output file and try again.</source>
         <translation>Не вказано ім&apos;я вихідного файлу. Будь ласка вкажіть ім&apos;я вихідного файлу та спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="159"/>
+        <location filename="gui/photo2shapedialog.py" line="160"/>
         <source>Import completed</source>
         <translation>Імпорт завершено</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="173"/>
+        <location filename="gui/photo2shapedialog.py" line="174"/>
         <source>Cannot load output shapefile</source>
         <translation>Не вдалось завантажити вихідний shape-файл</translation>
     </message>
@@ -171,24 +171,29 @@ Plugin will not be enabled.</source>
 <context>
     <name>PhotoImporter</name>
     <message>
-        <location filename="photoimporter.py" line="69"/>
+        <location filename="photoimporter.py" line="75"/>
         <source>Unable to open or create layer.</source>
         <translation>Не вдалось створити або відкрити шар.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="82"/>
+        <location filename="photoimporter.py" line="89"/>
         <source>No images found in directory.</source>
         <translation>У каталозі відсутні зображення.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="93"/>
+        <location filename="photoimporter.py" line="101"/>
         <source>Skipping file %s: there are no GPS tags in it.</source>
         <translation>Файл %s пропущено: відсутні теги GPS.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="101"/>
+        <location filename="photoimporter.py" line="109"/>
         <source>Skipping file %s: there are no GPS fix data.</source>
         <translation>Файл %s пропущено: відсутні координати GPS.</translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="64"/>
+        <source>Found exifread %s, but plugin requires exifread 1.4.x.</source>
+        <translation>Знайдено exifread %s, але плаґін працює лише з exifread 1.4.x.</translation>
     </message>
 </context>
 </TS>
