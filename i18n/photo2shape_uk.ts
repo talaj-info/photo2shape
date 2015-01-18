@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -15,7 +16,7 @@
     <message>
         <location filename="gui/aboutdialog.py" line="77"/>
         <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;NOTE: plugin requires 3rd party Python package exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;ПРИМІТКА: для роботи плаґіна потрібен модуль Python exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -202,7 +203,7 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photoimporter.py" line="64"/>
         <source>Found exifread %s, but plugin requires exifread &gt;= 2.0.0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Знайдено exifread %s, але плаґін працює лише з exifread &gt;=2.0.0.</translation>
     </message>
 </context>
 </TS>
