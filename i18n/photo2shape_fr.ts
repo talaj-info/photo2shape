@@ -352,7 +352,7 @@ Merci d&apos;entrer un nom valide et de réessayer.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="64"/>
-        <source>Found exifread %s, but plugin requires exifread &gt;= 2.0.0.</source>
+        <source>Found exifread %s, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
