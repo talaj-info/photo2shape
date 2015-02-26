@@ -60,10 +60,10 @@ class PhotoImporter(QObject):
         self.append = append
 
     def importPhotos(self):
-        if exifread.__version__[:-2] != '2.0':
+        if exifread.__version__ == '2.0.0':
             self.importError.emit(
                 self.tr('Found exifread %s, but plugin requires '
-                        'exifread >= 2.0.0.') % exifread.__version__)
+                        'exifread 1.x or >= 2.0.1.') % exifread.__version__)
             return
 
         if self.append:
@@ -97,7 +97,7 @@ class PhotoImporter(QObject):
             with open(fName, 'rb') as imgFile:
                 tags = exifread.process_file(imgFile, details=False)
 
-            if not tags.viewkeys() & {'EXIF GPS GPSLongitude', 'EXIF GPS GPSLatitude'}:
+            if not tags.viewkeys() & {'GPS GPSLongitude', 'GPS GPSLatitude'}:
                 self.importMessage.emit(
                     self.tr('Skipping file %s: there are no GPS tags in it.') % fName)
                 self.photoProcessed.emit(int(count * total))
@@ -165,29 +165,29 @@ class PhotoImporter(QObject):
     def _extractCoordinates(self, tags):
         # Some devices (e.g. with Android 1.6) write tags in non standard
         # way as decimal degrees in ASCII field
-        dataType = tags['EXIF GPS GPSLongitude'].field_type
+        dataType = tags['GPS GPSLongitude'].field_type
         typeName = exifread.tags.FIELD_TYPES[dataType][2]
         if typeName == 'ASCII':
-            lon = round(float(tags['EXIF GPS GPSLongitude'].values), 7)
-            lat = round(float(tags['EXIF GPS GPSLatitude'].values), 7)
+            lon = round(float(tags['GPS GPSLongitude'].values), 7)
+            lat = round(float(tags['GPS GPSLatitude'].values), 7)
             return lon, lat
 
         # Sometimes tags present by filled with zeros
-        if tags['EXIF GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
+        if tags['GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
             return None, None
 
         # Longitude direction will be either "E" or "W"
-        lonDirection = tags['EXIF GPS GPSLongitudeRef'].printable
+        lonDirection = tags['GPS GPSLongitudeRef'].printable
         # Coordinates stored as list of degrees, minutes and seconds
-        v = tags['EXIF GPS GPSLongitude'].values
+        v = tags['GPS GPSLongitude'].values
         ddLon = v[0].num if v[0].den == 1 else (v[0].num * 1.0) / v[0].den
         mmLon = v[1].num if v[1].den == 1 else (v[1].num * 1.0) / v[1].den
         ssLon = v[2].num if v[2].den == 1 else (v[2].num * 1.0) / v[2].den
 
         # Latitude direction will be either "N" or "S"
-        latDirection = tags['EXIF GPS GPSLatitudeRef'].printable
+        latDirection = tags['GPS GPSLatitudeRef'].printable
         # Coordinates stored as list of degrees, minutes and seconds
-        v = tags['EXIF GPS GPSLatitude'].values
+        v = tags['GPS GPSLatitude'].values
         ddLat = v[0].num if v[0].den == 1 else (v[0].num * 1.0) / v[0].den
         mmLat = v[1].num if v[1].den == 1 else (v[1].num * 1.0) / v[1].den
         ssLat = v[2].num if v[2].den == 1 else (v[2].num * 1.0) / v[2].den
@@ -210,23 +210,23 @@ class PhotoImporter(QObject):
         return lon, lat
 
     def _extractAltitude(self, tags):
-        if 'EXIF GPS GPSAltitude' not in tags:
+        if 'GPS GPSAltitude' not in tags:
             return None
 
         # Some devices (e.g. with Android 1.6) write tags in non standard
         # way as ASCII field. Also they don't write GPS GPSAltitudeRef tag
-        dataType = tags['EXIF GPS GPSAltitude'].field_type
+        dataType = tags['GPS GPSAltitude'].field_type
         typeName = exifread.tags.FIELD_TYPES[dataType][2]
         if typeName == 'ASCII':
-            altitude = tags['EXIF GPS GPSAltitude'].values
+            altitude = tags['GPS GPSAltitude'].values
             return round(float(altitude), 7)
 
-        if 'EXIF GPS GPSAltitudeRef' not in tags:
+        if 'GPS GPSAltitudeRef' not in tags:
             return None
 
         # Reference will be either 0 or 1
-        reference = tags['EXIF GPS GPSAltitudeRef'].values[0]
-        v = tags['EXIF GPS GPSAltitude'].values[0]
+        reference = tags['GPS GPSAltitudeRef'].values[0]
+        v = tags['GPS GPSAltitude'].values[0]
         altitude = float(v.num) if v.den == 1 else (v.num * 1.0) / v.den
 
         # Apply reference
@@ -236,34 +236,34 @@ class PhotoImporter(QObject):
         return round(altitude, 7)
 
     def _extractDirection(self, tags):
-        if 'EXIF GPS GPSImgDirection' not in tags:
+        if 'GPS GPSImgDirection' not in tags:
             return None, None
 
         # Sometimes tag present by filled with zeros
-        if tags['EXIF GPS GPSImgDirection'].printable == '[0/0, 0/0, 0/0]':
+        if tags['GPS GPSImgDirection'].printable == '[0/0, 0/0, 0/0]':
             return None, None
 
         # Reference will be either "T" or "M"
-        reference = tags['EXIF GPS GPSImgDirectionRef'].values
-        v = tags['EXIF GPS GPSImgDirection'].values[0]
+        reference = tags['GPS GPSImgDirectionRef'].values
+        v = tags['GPS GPSImgDirection'].values[0]
         azimuth = float(v.num) if v.den == 1 else (v.num * 1.0) / v.den
 
         return reference, round(azimuth, 7)
 
     def _extracrGPSDateTime(self, tags):
         imgDate = None
-        if 'EXIF GPS GPSDate' in tags:
-            imgDate = tags['EXIF GPS GPSDate'].values
+        if 'GPS GPSDate' in tags:
+            imgDate = tags['GPS GPSDate'].values
 
-        if 'EXIF GPS GPSTimeStamp' in tags:
+        if 'GPS GPSTimeStamp' in tags:
             # Some devices (e.g. with Android 1.6) write tags in non standard
             # way as ASCII field. Also they don't write GPS GPSDate tag
-            dataType = tags['EXIF GPS GPSTimeStamp'].field_type
+            dataType = tags['GPS GPSTimeStamp'].field_type
             typeName = exifread.tags.FIELD_TYPES[dataType][2]
             if typeName == 'ASCII':
-                return tags['EXIF GPS GPSTimeStamp'].values
+                return tags['GPS GPSTimeStamp'].values
             else:
-                v = tags['EXIF GPS GPSTimeStamp'].values
+                v = tags['GPS GPSTimeStamp'].values
                 imgTime = '{:0>2}:{:0>2}:{:0>2}'.format(v[0], v[1], v[2])
                 if imgDate is None:
                     return imgTime
@@ -273,7 +273,7 @@ class PhotoImporter(QObject):
         return None
 
     def _extractImageDateTime(self, tags):
-        if 'EXIF Image DateTime' in tags:
-            return tags['EXIF Image DateTime'].values
+        if 'Image DateTime' in tags:
+            return tags['Image DateTime'].values
 
         return None
