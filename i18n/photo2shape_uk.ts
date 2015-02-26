@@ -203,7 +203,12 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photoimporter.py" line="64"/>
         <source>Found exifread %s, but plugin requires exifread &gt;= 2.0.0.</source>
-        <translation>Знайдено exifread %s, але плаґін працює лише з exifread &gt;=2.0.0.</translation>
+        <translation type="obsolete">Знайдено exifread %s, але плаґін працює лише з exifread &gt;=2.0.0.</translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="64"/>
+        <source>Found exifread %s, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
+        <translation>Знайдено exifread %s, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
     </message>
 </context>
 </TS>
