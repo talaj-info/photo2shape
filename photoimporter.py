@@ -155,11 +155,12 @@ class PhotoImporter(QObject):
         crs = QgsCoordinateReferenceSystem(4326)
         writer = QgsVectorFileWriter(
             self.shapePath, self.encoding, fields, QGis.WKBPoint, crs)
+        if writer.hasError() != QgsVectorFileWriter.NoError:
+            return None
         del writer
 
         layer = QgsVectorLayer(
             self.shapePath, QFileInfo(self.shapePath).baseName(), 'ogr')
-
         return layer
 
     def _extractCoordinates(self, tags):
