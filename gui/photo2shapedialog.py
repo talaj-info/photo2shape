@@ -68,11 +68,24 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
         self.thread.started.connect(self.importer.importPhotos)
 
+        self.encoding = self.settings.value('encoding', 'System')
+
         self.manageGui()
 
     def manageGui(self):
+        lastDir = self.settings.value('lastPhotosDir', '')
+        self.lePhotosPath.setText(lastDir)
+        lastShapeFile = self.settings.value('lastShapeFile', '')
+        self.leOutputShape.setText(lastShapeFile)
         self.chkRecurse.setChecked(self.settings.value('recurse', True, bool))
-        self.chkAppend.setChecked(self.settings.value('append', True, bool))
+
+        if os.path.isfile(lastShapeFile):
+            self.chkAppend.setChecked(self.settings.value('append', True, bool))
+            self.chkAppend.setEnabled(True)
+        else:
+            self.chkAppend.setChecked(False)
+            self.chkAppend.setEnabled(False)
+
         self.chkLoadLayer.setChecked(
             self.settings.value('loadLayer', True, bool))
 
@@ -87,31 +100,37 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
         if dirName == '':
             return
+        else:
+            dirName = os.path.abspath(dirName)
 
         self.lePhotosPath.setText(dirName)
-        self.settings.setValue('lastPhotosDir', os.path.dirname(dirName))
+        self.settings.setValue('lastPhotosDir', dirName)
 
     def selectFile(self):
-        lastDir = self.settings.value('lastShapeDir', '.')
+        lastShapeFile = self.settings.value('lastShapeFile', '')
         shpFilter = self.tr('ESRI Shapefiles (*.shp *.SHP)')
         encoding = self.settings.value('encoding', 'System')
 
         fileDialog = QgsEncodingFileDialog(
-            self, self.tr('Save file'), lastDir, shpFilter, encoding)
+            self, self.tr('Save file'), lastShapeFile, shpFilter, encoding)
 
         fileDialog.setDefaultSuffix('shp')
         fileDialog.setFileMode(QFileDialog.AnyFile)
         fileDialog.setAcceptMode(QFileDialog.AcceptSave)
-        fileDialog.setConfirmOverwrite(True)
+        fileDialog.setConfirmOverwrite(False)
 
         if fileDialog.exec_():
             fileName = fileDialog.selectedFiles()[0]
+            fileName = os.path.abspath(fileName)
             self.encoding = fileDialog.encoding()
-
             self.leOutputShape.setText(fileName)
-            self.settings.setValue('lastShapeDir',
-                QFileInfo(fileName).absoluteDir().absolutePath())
-            self.settings.setValue('encoding', encoding)
+            self.settings.setValue('lastShapeFile', fileName)
+            self.settings.setValue('encoding', self.encoding)
+            if os.path.isfile(fileName):
+                self.chkAppend.setEnabled(True)
+            else:
+                self.chkAppend.setChecked(False)
+                self.chkAppend.setEnabled(False)
 
     def reject(self):
         self._saveSettings()
