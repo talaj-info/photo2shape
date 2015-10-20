@@ -26,6 +26,7 @@ __copyright__ = '(C) 2010-2014, Alexander Bruy'
 __revision__ = '$Format:%H$'
 
 import os
+import sys
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -46,6 +47,8 @@ class Photo2ShapePlugin:
         self.qgsVersion = unicode(QGis.QGIS_VERSION_INT)
 
         pluginPath = os.path.abspath(os.path.dirname(__file__))
+        encoding = sys.getfilesystemencoding()
+        pluginPath = pluginPath.decode(encoding)
 
         overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
         if not overrideLocale:
