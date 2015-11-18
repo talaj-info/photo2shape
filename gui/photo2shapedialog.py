@@ -94,7 +94,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
     def selectFile(self):
         lastDir = self.settings.value('lastShapeDir', '.')
         shpFilter = self.tr('ESRI Shapefiles (*.shp *.SHP)')
-        encoding = self.settings.value('encoding', 'System')
+        self.encoding = self.settings.value('encoding', 'System')
 
         fileDialog = QgsEncodingFileDialog(
             self, self.tr('Save file'), lastDir, shpFilter, encoding)
@@ -111,7 +111,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
             self.leOutputShape.setText(fileName)
             self.settings.setValue('lastShapeDir',
                 QFileInfo(fileName).absoluteDir().absolutePath())
-            self.settings.setValue('encoding', encoding)
+            self.settings.setValue('encoding', self.encoding)
 
     def reject(self):
         self._saveSettings()
