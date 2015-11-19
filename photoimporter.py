@@ -231,6 +231,8 @@ class PhotoImporter(QObject):
         # Reference will be either 0 or 1
         reference = tags['GPS GPSAltitudeRef'].values[0]
         v = tags['GPS GPSAltitude'].values[0]
+        if v.num == 0:
+            return None
         altitude = float(v.num) if v.den == 1 else (v.num * 1.0) / v.den
 
         # Apply reference
