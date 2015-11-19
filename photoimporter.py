@@ -5,7 +5,7 @@
     photoimporter.py
     ---------------------
     Date                 : November 2014
-    Copyright            : (C) 2010-2014 by Alexander Bruy
+    Copyright            : (C) 2010-2015 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'November 2014'
-__copyright__ = '(C) 2010-2014, Alexander Bruy'
+__copyright__ = '(C) 2010-2015, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -29,9 +29,11 @@ import os
 
 import exifread
 
-from PyQt4.QtCore import *
+from PyQt4.QtCore import pyqtSignal, QObject, QVariant, QFileInfo
 
-from qgis.core import *
+from qgis.core import (
+    QGis, QgsFeature, QgsFields, QgsField, QgsGeometry, QgsPoint,
+    QgsVectorLayer, QgsVectorFileWriter, QgsCoordinateReferenceSystem)
 
 
 class PhotoImporter(QObject):
@@ -62,8 +64,8 @@ class PhotoImporter(QObject):
     def importPhotos(self):
         if exifread.__version__ == '2.0.0':
             self.importError.emit(
-                self.tr('Found exifread %s, but plugin requires '
-                        'exifread 1.x or >= 2.0.1.') % exifread.__version__)
+                self.tr('Found exifread {}, but plugin requires exifread '
+                        '1.x or >= 2.0.1.'.format(exifread.__version__)))
             return
 
         if self.append:
@@ -99,7 +101,8 @@ class PhotoImporter(QObject):
 
             if not tags.viewkeys() & {'GPS GPSLongitude', 'GPS GPSLatitude'}:
                 self.importMessage.emit(
-                    self.tr('Skipping file %s: there are no GPS tags in it.') % fName)
+                    self.tr('Skipping file {}: '
+                            'there are no GPS tags in it.'.format(fName)))
                 self.photoProcessed.emit(int(count * total))
                 continue
 
@@ -107,7 +110,8 @@ class PhotoImporter(QObject):
             longitude, latitude = self._extractCoordinates(tags)
             if longitude is None:
                 self.importMessage.emit(
-                    self.tr('Skipping file %s: there are no GPS fix data.') % fName)
+                    self.tr('Skipping file {}: '
+                            'there are no GPS fix data.'.format(fName)))
                 self.photoProcessed.emit(int(count * total))
                 continue
 
@@ -142,15 +146,15 @@ class PhotoImporter(QObject):
 
     def _newShapefile(self):
         fields = QgsFields()
-        fields.append(QgsField('filepath', QVariant.String, '', 255))
-        fields.append(QgsField('filename', QVariant.String, '', 255))
+        fields.append(QgsField('filepath', QVariant.String, '', 254))
+        fields.append(QgsField('filename', QVariant.String, '', 254))
         fields.append(QgsField('longitude', QVariant.Double, '', 20, 7))
         fields.append(QgsField('latitude', QVariant.Double, '', 20, 7))
         fields.append(QgsField('altitude', QVariant.Double, '', 20, 7))
         fields.append(QgsField('north', QVariant.String, '', 1))
         fields.append(QgsField('azimuth', QVariant.Double, '', 20, 7))
-        fields.append(QgsField('gps_date', QVariant.String, '', 255))
-        fields.append(QgsField('img_date', QVariant.String, '', 255))
+        fields.append(QgsField('gps_date', QVariant.String, '', 254))
+        fields.append(QgsField('img_date', QVariant.String, '', 254))
 
         crs = QgsCoordinateReferenceSystem(4326)
         writer = QgsVectorFileWriter(

@@ -5,7 +5,7 @@
     photo2shapedialog.py
     ---------------------
     Date                 : February 2010
-    Copyright            : (C) 2010-2014 by Alexander Bruy
+    Copyright            : (C) 2010-2015 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'February 2010'
-__copyright__ = '(C) 2010-2014, Alexander Bruy'
+__copyright__ = '(C) 2010-2015, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -27,22 +27,24 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt4 import uic
+from PyQt4.QtCore import QSettings, QThread, QFileInfo
+from PyQt4.QtGui import QDialog, QDialogButtonBox, QFileDialog
 
-from qgis.core import *
-from qgis.gui import *
+from qgis.core import QgsVectorLayer, QgsMapLayerRegistry, QgsMessageLog
+from qgis.gui import QgsEncodingFileDialog
 
 from photo2shape.photoimporter import PhotoImporter
 
-from photo2shape.ui.ui_photo2shapedialogbase import Ui_Dialog
 
-import photo2shape.resources_rc
+pluginPath = os.path.split(os.path.dirname(__file__))[0]
+WIDGET, BASE = uic.loadUiType(
+    os.path.join(pluginPath, 'ui', 'photo2shapedialogbase.ui'))
 
 
-class Photo2ShapeDialog(QDialog, Ui_Dialog):
-    def __init__(self, iface):
-        QDialog.__init__(self)
+class Photo2ShapeDialog(BASE, WIDGET):
+    def __init__(self, iface, parent=None):
+        super(Photo2ShapeDialog, self).__init__(parent)
         self.setupUi(self)
 
         self.iface = iface
@@ -97,7 +99,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.encoding = self.settings.value('encoding', 'System')
 
         fileDialog = QgsEncodingFileDialog(
-            self, self.tr('Save file'), lastDir, shpFilter, encoding)
+            self, self.tr('Save file'), lastDir, shpFilter, self.encoding)
 
         fileDialog.setDefaultSuffix('shp')
         fileDialog.setFileMode(QFileDialog.AnyFile)
@@ -122,7 +124,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
         dirName = self.lePhotosPath.text()
         if dirName == '':
-            QMessageBox.warning(self,
+            self.iface.messageBar().pushWarning(
                 self.tr('Path not set'),
                 self.tr('Path to photos is not set. Please specify directory '
                         'with photos and try again.'))
@@ -130,7 +132,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
 
         fileName = self.leOutputShape.text()
         if fileName == '':
-            QMessageBox.warning(self,
+            self.iface.messageBar().pushWarning(
                 self.tr('Output file is not set'),
                 self.tr('Output file name is missing. Please specify correct '
                         'output file and try again.'))
@@ -143,6 +145,7 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         self.importer.setAppendFile(self.chkAppend.isChecked())
 
         self.thread.start()
+
         self.btnOk.setEnabled(False)
         self.btnClose.setEnabled(False)
 
@@ -153,11 +156,13 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         QgsMessageLog.logMessage(message, 'Photo2Shape', level)
 
     def importCanceled(self, message):
-        self._showMessage(message, QgsMessageBar.WARNING)
+        self.iface.messageBar().pushWarning(message)
         self._restoreGui()
 
     def importCompleted(self):
-        self._showMessage(self.tr('Import completed'))
+        self.iface.messageBar().pushSuccess(
+            self.tr('Import completed'),
+            self.tr('Shapefile from photos sucessfully created'))
         if self.chkLoadLayer.isChecked():
             self._loadLayer()
 
@@ -168,21 +173,18 @@ class Photo2ShapeDialog(QDialog, Ui_Dialog):
         layer = QgsVectorLayer(fName, QFileInfo(fName).baseName(), 'ogr')
 
         if layer.isValid():
-            layer.loadNamedStyle(':/resources/photos.qml')
+            layer.loadNamedStyle(
+                os.path.join(pluginPath, 'resources', 'photos.qml'))
             QgsMapLayerRegistry.instance().addMapLayer(layer)
         else:
-            self.iface.messageBar().pushMessage(
-                self.tr('Cannot load output shapefile'),
-                QgsMessageBar.WARNING, self.iface.messageTimeout())
+            self.iface.messageBar().pushWarning(
+                self.tr('No output'),
+                self.tr('Cannot load output shapefile'))
 
     def _restoreGui(self):
         self.progressBar.setValue(0)
         self.btnOk.setEnabled(True)
         self.btnClose.setEnabled(True)
-
-    def _showMessage(self, message, level=QgsMessageBar.INFO):
-        self.iface.messageBar().pushMessage(
-            message, level, self.iface.messageTimeout())
 
     def _saveSettings(self):
         self.settings.setValue('recurse', self.chkRecurse.isChecked())
