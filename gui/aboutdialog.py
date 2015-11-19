@@ -5,7 +5,7 @@
     aboutdialog.py
     ---------------------
     Date                 : July 2013
-    Copyright            : (C) 2013-2014 by Alexander Bruy
+    Copyright            : (C) 2013-2015 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2013'
-__copyright__ = '(C) 2013-2014, Alexander Bruy'
+__copyright__ = '(C) 2013-2015, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -29,28 +29,32 @@ __revision__ = '$Format:%H$'
 import os
 import ConfigParser
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-
-from photo2shape.ui.ui_aboutdialogbase import Ui_Dialog
-
-import photo2shape.resources_rc
+from PyQt4 import uic
+from PyQt4.QtCore import QUrl, QSettings, QLocale
+from PyQt4.QtGui import (QDialogButtonBox, QTextDocument, QPixmap, QDialog,
+    QDesktopServices)
 
 
-class AboutDialog(QDialog, Ui_Dialog):
-    def __init__(self):
-        QDialog.__init__(self)
+pluginPath = os.path.split(os.path.dirname(__file__))[0]
+WIDGET, BASE = uic.loadUiType(
+    os.path.join(pluginPath, 'ui', 'aboutdialogbase.ui'))
+
+
+class AboutDialog(BASE, WIDGET):
+    def __init__(self, parent=None):
+        super(AboutDialog, self).__init__(parent)
         self.setupUi(self)
 
         self.btnHelp = self.buttonBox.button(QDialogButtonBox.Help)
 
         cfg = ConfigParser.SafeConfigParser()
-        cfg.read(os.path.join(
-            os.path.split(os.path.dirname(__file__))[0], 'metadata.txt'))
+        cfg.read(os.path.join(pluginPath, 'metadata.txt'))
         version = cfg.get('general', 'version')
 
-        self.lblLogo.setPixmap(QPixmap(":/icons/photo2shape.png"))
-        self.lblVersion.setText(self.tr('Version: %s') % version)
+        self.lblLogo.setPixmap(
+            QPixmap(os.path.join(pluginPath, 'icons', 'photo2shape.png')))
+        self.lblVersion.setText(self.tr('Version: {}'.format(version)))
+
         doc = QTextDocument()
         doc.setHtml(self.getAboutText())
         self.textBrowser.setDocument(doc)
@@ -61,12 +65,11 @@ class AboutDialog(QDialog, Ui_Dialog):
     def openHelp(self):
         overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
         if not overrideLocale:
-            localeFullName = QLocale.system().name()
+            locale = QLocale.system().name()[:2]
         else:
-            localeFullName = QSettings().value('locale/userLocale', '')
+            locale = QSettings().value('locale/userLocale', '')
 
-        localeShortName = localeFullName[0:2]
-        if localeShortName in ['uk']:
+        if locale in ['uk']:
             QDesktopServices.openUrl(
                 QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
         else:
