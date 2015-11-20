@@ -6,7 +6,7 @@
     <message>
         <location filename="gui/aboutdialog.py" line="53"/>
         <source>Version: %s</source>
-        <translation>Версія: %s</translation>
+        <translation type="obsolete">Версія: %s</translation>
     </message>
     <message>
         <location filename="gui/aboutdialog.py" line="77"/>
@@ -14,9 +14,14 @@
         <translation type="obsolete">&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="gui/aboutdialog.py" line="77"/>
+        <location filename="gui/aboutdialog.py" line="80"/>
         <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;NOTE: plugin requires 3rd party Python package exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;ПРИМІТКА: для роботи плаґіна потрібен модуль Python exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="gui/aboutdialog.py" line="56"/>
+        <source>Version: {}</source>
+        <translation>Версія: {}</translation>
     </message>
 </context>
 <context>
@@ -98,16 +103,104 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="photo2shape_plugin.py" line="97"/>
         <source>Photo2Shape</source>
-        <translation>Photo2Shape</translation>
+        <translation type="obsolete">Photo2Shape</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="67"/>
         <source>QGIS %s detected.
 This version of Photo2Shape requires at least QGIS 2.0.
 Plugin will not be enabled.</source>
-        <translation>Знайдено QGIS %s.
+        <translation type="obsolete">Знайдено QGIS %s.
 Ця версія Photo2Shape потребує QGIS 2.0 або новішу.
 Плагін не буде активовано.</translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="76"/>
+        <source>Create a point shapefile from geotagged images</source>
+        <translation type="obsolete">Створити точковий shape-файл з набору геотегованих зображень</translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="79"/>
+        <source>About Photo2Shape...</source>
+        <translation type="obsolete">Про Photo2Shape...</translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="82"/>
+        <source>About Photo2Shape</source>
+        <translation type="obsolete">Про Photo2Shape</translation>
+    </message>
+</context>
+<context>
+    <name>Photo2ShapeDialog</name>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="98"/>
+        <source>ESRI Shapefiles (*.shp *.SHP)</source>
+        <translation>Shape-файли ESRI (*.shp *.SHP)</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="87"/>
+        <source>Select directory</source>
+        <translation>Виберіть каталог</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="101"/>
+        <source>Save file</source>
+        <translation>Зберегти файл</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="127"/>
+        <source>Path not set</source>
+        <translation>Шлях не задано</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="127"/>
+        <source>Path to photos is not set. Please specify directory with photos and try again.</source>
+        <translation>Каталог зображень не задано. Будь ласка задайте каталог зображень та спробуйте ще раз.</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="135"/>
+        <source>Output file is not set</source>
+        <translation>Вихідний файл не задано</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="135"/>
+        <source>Output file name is missing. Please specify correct output file and try again.</source>
+        <translation>Не вказано ім&apos;я вихідного файлу. Будь ласка вкажіть ім&apos;я вихідного файлу та спробуйте ще раз.</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="163"/>
+        <source>Import completed</source>
+        <translation>Імпорт завершено</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="180"/>
+        <source>Cannot load output shapefile</source>
+        <translation>Не вдалось завантажити вихідний shape-файл</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="163"/>
+        <source>Shapefile from photos sucessfully created</source>
+        <translation>Shape-файл створено успішно</translation>
+    </message>
+    <message>
+        <location filename="gui/photo2shapedialog.py" line="180"/>
+        <source>No output</source>
+        <translation>Відсутній вихідний файл</translation>
+    </message>
+</context>
+<context>
+    <name>Photo2ShapePlugin</name>
+    <message>
+        <location filename="photo2shape_plugin.py" line="66"/>
+        <source>QGIS {} detected.
+This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabled.</source>
+        <translation>Знайдено QGIS {}.
+Ця версія Photo2Shape потребує QGIS 2.0 або новішу. Плагін не буде активовано.</translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="99"/>
+        <source>Photo2Shape</source>
+        <translation>Photo2Shape</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="76"/>
@@ -115,85 +208,37 @@ Plugin will not be enabled.</source>
         <translation>Створити точковий shape-файл з набору геотегованих зображень</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="79"/>
+        <location filename="photo2shape_plugin.py" line="80"/>
         <source>About Photo2Shape...</source>
         <translation>Про Photo2Shape...</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="82"/>
+        <location filename="photo2shape_plugin.py" line="84"/>
         <source>About Photo2Shape</source>
         <translation>Про Photo2Shape</translation>
     </message>
 </context>
 <context>
-    <name>Photo2ShapeDialog</name>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="96"/>
-        <source>ESRI Shapefiles (*.shp *.SHP)</source>
-        <translation>Shape-файли ESRI (*.shp *.SHP)</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="85"/>
-        <source>Select directory</source>
-        <translation>Виберіть каталог</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="99"/>
-        <source>Save file</source>
-        <translation>Зберегти файл</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="125"/>
-        <source>Path not set</source>
-        <translation>Шлях не задано</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="125"/>
-        <source>Path to photos is not set. Please specify directory with photos and try again.</source>
-        <translation>Каталог зображень не задано. Будь ласка задайте каталог зображень та спробуйте ще раз.</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="133"/>
-        <source>Output file is not set</source>
-        <translation>Вихідний файл не задано</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="133"/>
-        <source>Output file name is missing. Please specify correct output file and try again.</source>
-        <translation>Не вказано ім&apos;я вихідного файлу. Будь ласка вкажіть ім&apos;я вихідного файлу та спробуйте ще раз.</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="160"/>
-        <source>Import completed</source>
-        <translation>Імпорт завершено</translation>
-    </message>
-    <message>
-        <location filename="gui/photo2shapedialog.py" line="174"/>
-        <source>Cannot load output shapefile</source>
-        <translation>Не вдалось завантажити вихідний shape-файл</translation>
-    </message>
-</context>
-<context>
     <name>PhotoImporter</name>
     <message>
-        <location filename="photoimporter.py" line="75"/>
+        <location filename="photoimporter.py" line="77"/>
         <source>Unable to open or create layer.</source>
         <translation>Не вдалось створити або відкрити шар.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="89"/>
+        <location filename="photoimporter.py" line="91"/>
         <source>No images found in directory.</source>
         <translation>У каталозі відсутні зображення.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="101"/>
         <source>Skipping file %s: there are no GPS tags in it.</source>
-        <translation>Файл %s пропущено: відсутні теги GPS.</translation>
+        <translation type="obsolete">Файл %s пропущено: відсутні теги GPS.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="109"/>
         <source>Skipping file %s: there are no GPS fix data.</source>
-        <translation>Файл %s пропущено: відсутні координати GPS.</translation>
+        <translation type="obsolete">Файл %s пропущено: відсутні координати GPS.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="64"/>
@@ -208,7 +253,22 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="photoimporter.py" line="64"/>
         <source>Found exifread %s, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
-        <translation>Знайдено exifread %s, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
+        <translation type="obsolete">Знайдено exifread %s, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="66"/>
+        <source>Found exifread {}, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
+        <translation>Знайдено exifread {}, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="103"/>
+        <source>Skipping file {}: there are no GPS tags in it.</source>
+        <translation>Файл {} пропущено: відсутні теги GPS.</translation>
+    </message>
+    <message>
+        <location filename="photoimporter.py" line="112"/>
+        <source>Skipping file {}: there are no GPS fix data.</source>
+        <translation>Файл {} пропущено: відсутні координати GPS.</translation>
     </message>
 </context>
 </TS>
