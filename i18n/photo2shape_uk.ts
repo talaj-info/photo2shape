@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -20,7 +21,7 @@
     <message>
         <location filename="gui/aboutdialog.py" line="56"/>
         <source>Version: {}</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія: {}</translation>
     </message>
 </context>
 <context>
@@ -179,12 +180,12 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="gui/photo2shapedialog.py" line="163"/>
         <source>Shapefile from photos sucessfully created</source>
-        <translation type="unfinished"></translation>
+        <translation>Shape-файл створено успішно</translation>
     </message>
     <message>
         <location filename="gui/photo2shapedialog.py" line="180"/>
         <source>No output</source>
-        <translation type="unfinished"></translation>
+        <translation>Відсутній вихідний файл</translation>
     </message>
 </context>
 <context>
@@ -193,27 +194,28 @@ Plugin will not be enabled.</source>
         <location filename="photo2shape_plugin.py" line="66"/>
         <source>QGIS {} detected.
 This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Знайдено QGIS {}.
+Ця версія Photo2Shape потребує QGIS 2.0 або новішу. Плагін не буде активовано.</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="99"/>
         <source>Photo2Shape</source>
-        <translation type="unfinished">Photo2Shape</translation>
+        <translation>Photo2Shape</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="76"/>
         <source>Create a point shapefile from geotagged images</source>
-        <translation type="unfinished">Створити точковий shape-файл з набору геотегованих зображень</translation>
+        <translation>Створити точковий shape-файл з набору геотегованих зображень</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="80"/>
         <source>About Photo2Shape...</source>
-        <translation type="unfinished">Про Photo2Shape...</translation>
+        <translation>Про Photo2Shape...</translation>
     </message>
     <message>
         <location filename="photo2shape_plugin.py" line="84"/>
         <source>About Photo2Shape</source>
-        <translation type="unfinished">Про Photo2Shape</translation>
+        <translation>Про Photo2Shape</translation>
     </message>
 </context>
 <context>
@@ -256,17 +258,17 @@ This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabl
     <message>
         <location filename="photoimporter.py" line="66"/>
         <source>Found exifread {}, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Знайдено exifread {}, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="103"/>
         <source>Skipping file {}: there are no GPS tags in it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл {} пропущено: відсутні теги GPS.</translation>
     </message>
     <message>
         <location filename="photoimporter.py" line="112"/>
         <source>Skipping file {}: there are no GPS fix data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл {} пропущено: відсутні координати GPS.</translation>
     </message>
 </context>
 </TS>
