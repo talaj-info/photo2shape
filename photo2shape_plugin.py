@@ -42,7 +42,6 @@ pluginPath = os.path.dirname(__file__)
 class Photo2ShapePlugin:
     def __init__(self, iface):
         self.iface = iface
-        self.canvas = self.iface.mapCanvas()
 
         self.qgsVersion = unicode(QGis.QGIS_VERSION_INT)
 
