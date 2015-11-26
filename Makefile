@@ -5,7 +5,7 @@ LANG_FILES=$(patsubst $(LANG_PATH)/%.ts, $(LANG_PATH)/%.qm, $(LANG_SOURCES))
 PRO_PATH=.
 PRO_FILES=$(wildcard $(PRO_PATH)/*.pro)
 
-ALL_FILES= ${LANG_FILES}
+ALL_FILES=${LANG_FILES}
 
 all: $(ALL_FILES)
 

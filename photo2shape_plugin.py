@@ -55,7 +55,7 @@ class Photo2ShapePlugin:
 
         if os.path.exists(qmPath):
             self.translator = QTranslator()
-            self.translator.load(translationPath)
+            self.translator.load(qmPath)
             QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
