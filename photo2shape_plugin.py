@@ -64,7 +64,7 @@ class Photo2ShapePlugin:
                 self.qgsVersion[0], self.qgsVersion[2], self.qgsVersion[3])
             QMessageBox.warning(self.iface.mainWindow(), 'Photo2Shape',
                 self.tr('QGIS {} detected.\nThis version of Photo2Shape '
-                        'requires at least QGIS 2.0. Plugin will not be '
+                        'requires at least QGIS 2.8. Plugin will not be '
                         'enabled.'.format(qgisVersion)))
             return None
 
