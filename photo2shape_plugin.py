@@ -57,7 +57,7 @@ class Photo2ShapePlugin:
         else:
             locale = QSettings().value('locale/userLocale', '')
 
-        qmPath = '{}/i18n/photo2shape_{}.qm'.format(pluginPath, locale)
+        qmPath = u'{}/i18n/photo2shape_{}.qm'.format(pluginPath, locale)
 
         if os.path.exists(qmPath):
             self.translator = QTranslator()
