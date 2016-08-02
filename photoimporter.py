@@ -26,6 +26,7 @@ __copyright__ = '(C) 2010-2015, Alexander Bruy'
 __revision__ = '$Format:%H$'
 
 import os
+import time
 
 import exifread
 
@@ -98,29 +99,23 @@ class PhotoImporter(QObject):
         for count, fName in enumerate(photos):
             with open(fName, 'rb') as imgFile:
                 tags = exifread.process_file(imgFile, details=False)
-
             if not tags.viewkeys() & {'GPS GPSLongitude', 'GPS GPSLatitude'}:
-                self.importMessage.emit(
-                    self.tr('Skipping file {}: '
-                            'there are no GPS tags in it.'.format(fName)))
+                s = u'Skipping file "{}": there are no GPS tags in it.'.format(fName)
+                self.importMessage.emit(s)
                 self.photoProcessed.emit(int(count * total))
                 continue
-
             # Start processing tags
             longitude, latitude = self._extractCoordinates(tags)
             if longitude is None:
-                self.importMessage.emit(
-                    self.tr('Skipping file {}: '
-                            'there are no GPS fix data.'.format(fName)))
+                s = u'Skipping file "{}": there are no GPS fix data.'.format(fName)
+                self.importMessage.emit(s)
                 self.photoProcessed.emit(int(count * total))
                 continue
-
             altitude = self._extractAltitude(tags)
             north, azimuth = self._extractDirection(tags)
             gpsDate = self._extracrGPSDateTime(tags)
             imgDate = self._extractImageDateTime(tags)
             del tags
-
             # Write feature to layer
             ft.setGeometry(
                 QgsGeometry.fromPoint(QgsPoint(longitude, latitude)))

@@ -114,7 +114,8 @@ class Photo2ShapeDialog(BASE, WIDGET):
         self.encoding = self.settings.value('encoding', 'System')
 
         fileDialog = QgsEncodingFileDialog(
-            self, self.tr('Save file'), lastShapeFile, shpFilter, encoding)
+            self, self.tr('Save file'), lastShapeFile, shpFilter,
+            self.encoding)
 
         fileDialog.setDefaultSuffix('shp')
         fileDialog.setFileMode(QFileDialog.AnyFile)
@@ -172,10 +173,14 @@ class Photo2ShapeDialog(BASE, WIDGET):
         self.progressBar.setValue(value)
 
     def logMessage(self, message, level=QgsMessageLog.INFO):
+        self.iface.messageBar().pushInfo(
+            self.tr('Info'), message)
         QgsMessageLog.logMessage(message, 'Photo2Shape', level)
 
     def importCanceled(self, message):
-        self.iface.messageBar().pushWarning(message)
+        self.iface.messageBar().pushWarning(
+            self.tr('Import cancelled'),
+            message)
         self._restoreGui()
 
     def importCompleted(self):
