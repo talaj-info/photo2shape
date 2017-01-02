@@ -193,28 +193,34 @@ Plugin will not be enabled.</source>
         <location filename="photo2shape_plugin.py" line="66"/>
         <source>QGIS {} detected.
 This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabled.</source>
-        <translation>Знайдено QGIS {}.
+        <translation type="obsolete">Знайдено QGIS {}.
 Ця версія Photo2Shape потребує QGIS 2.0 або новішу. Плагін не буде активовано.</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="99"/>
+        <location filename="photo2shape_plugin.py" line="98"/>
         <source>Photo2Shape</source>
         <translation>Photo2Shape</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="76"/>
+        <location filename="photo2shape_plugin.py" line="75"/>
         <source>Create a point shapefile from geotagged images</source>
         <translation>Створити точковий shape-файл з набору геотегованих зображень</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="80"/>
+        <location filename="photo2shape_plugin.py" line="79"/>
         <source>About Photo2Shape...</source>
         <translation>Про Photo2Shape...</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="84"/>
+        <location filename="photo2shape_plugin.py" line="83"/>
         <source>About Photo2Shape</source>
         <translation>Про Photo2Shape</translation>
+    </message>
+    <message>
+        <location filename="photo2shape_plugin.py" line="65"/>
+        <source>QGIS {} detected.
+This version of Photo2Shape requires at least QGIS 2.8. Plugin will not be enabled.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
