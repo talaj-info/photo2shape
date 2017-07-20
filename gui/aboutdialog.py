@@ -80,12 +80,10 @@ class AboutDialog(BASE, WIDGET):
         return self.tr(
             '<p>Create point shapefile from a set of geotagged photos. '
             'Inspired by ImagesToShape plugin from Tim Sutton.</p>'
-            '<p>NOTE: plugin requires 3rd party Python package '
-            'exifread >= 2.0.0</p>'
             '<p><strong>Developers</strong>: Alexander Bruy</p>'
             '<p><strong>Homepage</strong>: '
-            '<a href="http://hub.qgis.org/projects/photo2shape">'
-            'http://hub.qgis.org/projects/photo2shape</a></p>'
+            '<a href="https://github.com/alexbruy/photo2shape">'
+            'https://github.com/alexbruy/photo2shape</a></p>'
             '<p>Please report bugs at '
-            '<a href="http://hub.qgis.org/projects/photo2shape/issues">'
+            '<a href="https://github.com/alexbruy/photo2shape/issues">'
             'bugtracker</a>.</p>')
