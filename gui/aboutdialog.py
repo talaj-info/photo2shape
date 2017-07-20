@@ -71,10 +71,10 @@ class AboutDialog(BASE, WIDGET):
 
         if locale in ['uk']:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
+                QUrl('https://github.com/alexbruy/photo2shape'))
         else:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
+                QUrl('https://github.com/alexbruy/photo2shape'))
 
     def getAboutText(self):
         return self.tr(
