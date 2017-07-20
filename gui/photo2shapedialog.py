@@ -138,6 +138,11 @@ class Photo2ShapeDialog(BASE, WIDGET):
                         'output file and try again.'))
             return
 
+        # make sure output file always has correct suffix
+        if not fileName.lower().endswith('.shp'):
+            fileName += '.shp'
+            self.leOutputShape.setText(fileName)
+
         if self.chkAppend.isChecked() and not os.path.isfile(fileName):
             self.iface.messageBar().pushWarning(
                 self.tr('Appending is not possible'),
