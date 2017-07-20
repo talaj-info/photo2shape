@@ -252,7 +252,7 @@ class PhotoImporter(QObject):
             return None, None
 
         # Sometimes tag present by filled with zeros
-        if tags['GPS GPSImgDirection'].printable == '[0/0, 0/0, 0/0]':
+        if tags['GPS GPSImgDirection'].printable in ['[0/0, 0/0, 0/0]', '0/0']:
             return None, None
 
         # Reference will be either "T" or "M"
