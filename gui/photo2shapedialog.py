@@ -69,6 +69,7 @@ class Photo2ShapeDialog(BASE, WIDGET):
 
         self.thread.started.connect(self.importer.importPhotos)
 
+        self.encoding = self.settings.value('encoding', 'System')
         self.manageGui()
 
     def manageGui(self):
