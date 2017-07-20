@@ -137,6 +137,14 @@ class Photo2ShapeDialog(BASE, WIDGET):
                         'output file and try again.'))
             return
 
+        if self.chkAppend.isChecked() and not os.path.isfile(fileName):
+            self.iface.messageBar().pushWarning(
+                self.tr('Appending is not possible'),
+                self.tr('Output file is a new file and can not be used '
+                        'in "append" mode. Either specify existing file '
+                        'or uncheck corresponding checkbox.'))
+            return
+
         self.importer.setPhotosDirectory(dirName)
         self.importer.setOutputPath(fileName)
         self.importer.setEncoding(self.encoding)
