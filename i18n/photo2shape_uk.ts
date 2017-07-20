@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="uk_UA" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.1" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -25,7 +26,7 @@
     <message>
         <location filename="../gui/aboutdialog.py" line="80"/>
         <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;https://github.com/alexbruy/photo2shape&quot;&gt;https://github.com/alexbruy/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;https://github.com/alexbruy/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;https://github.com/alexbruy/photo2shape&quot;&gt;https://github.com/alexbruy/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;https://github.com/alexbruy/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -194,17 +195,17 @@ Plugin will not be enabled.</source>
     <message>
         <location filename="../gui/photo2shapedialog.py" line="147"/>
         <source>Appending is not possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Дописування неможливе</translation>
     </message>
     <message>
         <location filename="../gui/photo2shapedialog.py" line="147"/>
         <source>Output file is a new file and can not be used in &quot;append&quot; mode. Either specify existing file or uncheck corresponding checkbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вихідний файл не існує та не може бути викоританий у режимі &quot;оновлення&quot;. Або вкажіть існуючий файл або відключіть відповідну настройку.</translation>
     </message>
     <message>
         <location filename="../gui/photo2shapedialog.py" line="172"/>
         <source>Import error</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка імпорту</translation>
     </message>
 </context>
 <context>
