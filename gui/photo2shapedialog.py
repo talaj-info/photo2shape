@@ -5,7 +5,7 @@
     photo2shapedialog.py
     ---------------------
     Date                 : February 2010
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'February 2010'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -27,15 +27,14 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4 import uic
-from PyQt4.QtCore import QSettings, QThread, QFileInfo
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QFileDialog
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import QSettings, QThread, QFileInfo
+from qgis.PyQt.QtWidgets import QDialog, QDialogButtonBox, QFileDialog
 
 from qgis.core import QgsVectorLayer, QgsMapLayerRegistry, QgsMessageLog
 from qgis.gui import QgsEncodingFileDialog
 
 from photo2shape.photoimporter import PhotoImporter
-
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 WIDGET, BASE = uic.loadUiType(

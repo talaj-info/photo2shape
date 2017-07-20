@@ -5,7 +5,7 @@
     aboutdialog.py
     ---------------------
     Date                 : July 2013
-    Copyright            : (C) 2013-2015 by Alexander Bruy
+    Copyright            : (C) 2013-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2013'
-__copyright__ = '(C) 2013-2015, Alexander Bruy'
+__copyright__ = '(C) 2013-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -29,10 +29,10 @@ __revision__ = '$Format:%H$'
 import os
 import ConfigParser
 
-from PyQt4 import uic
-from PyQt4.QtCore import QUrl, QSettings, QLocale
-from PyQt4.QtGui import (QDialogButtonBox, QTextDocument, QPixmap, QDialog,
-    QDesktopServices)
+from qgis.PyQt import uic
+from qgis.PyQt.QtGui import QTextDocument, QPixmap, QDesktopServices
+from qgis.PyQt.QtCore import QUrl, QSettings, QLocale
+from qgis.PyQt.QtWidgets import QDialogButtonBox, QDialog
 
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]

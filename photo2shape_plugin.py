@@ -5,7 +5,7 @@
     photo2shape_plugin.py
     ---------------------
     Date                 : February 2010
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'February 2010'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -27,14 +27,14 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4.QtCore import (QCoreApplication, QSettings, QLocale, QTranslator)
-from PyQt4.QtGui import (QMessageBox, QAction, QIcon, QMenu)
+from qgis.PyQt.QtCore import (QCoreApplication, QSettings, QLocale, QTranslator)
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction
 
-from qgis.core import QGis
+from qgis.core import QgsApplication
 
 from photo2shape.gui.photo2shapedialog import Photo2ShapeDialog
 from photo2shape.gui.aboutdialog import AboutDialog
-
 
 pluginPath = os.path.dirname(__file__)
 
@@ -42,8 +42,6 @@ pluginPath = os.path.dirname(__file__)
 class Photo2ShapePlugin:
     def __init__(self, iface):
         self.iface = iface
-
-        self.qgsVersion = unicode(QGis.QGIS_VERSION_INT)
 
         overrideLocale = QSettings().value('locale/overrideFlag', False, bool)
         if not overrideLocale:
@@ -59,15 +57,6 @@ class Photo2ShapePlugin:
             QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
-        if int(self.qgsVersion) < 20000:
-            qgisVersion = '{}.{}.{}'.format(
-                self.qgsVersion[0], self.qgsVersion[2], self.qgsVersion[3])
-            QMessageBox.warning(self.iface.mainWindow(), 'Photo2Shape',
-                self.tr('QGIS {} detected.\nThis version of Photo2Shape '
-                        'requires at least QGIS 2.8. Plugin will not be '
-                        'enabled.'.format(qgisVersion)))
-            return None
-
         self.actionRun = QAction(
             self.tr('Photo2Shape'), self.iface.mainWindow())
         self.actionRun.setIcon(
@@ -79,7 +68,7 @@ class Photo2ShapePlugin:
         self.actionAbout = QAction(
             self.tr('About Photo2Shape...'), self.iface.mainWindow())
         self.actionAbout.setIcon(
-            QIcon(os.path.join(pluginPath, 'icons', 'photo2shape.png')))
+            QgsApplication.getThemeIcon('/mActionHelpContents.svg'))
         self.actionAbout.setWhatsThis(self.tr('About Photo2Shape'))
         self.actionRun.setObjectName('aboutPhoto2Shape')
 

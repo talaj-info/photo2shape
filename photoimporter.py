@@ -5,7 +5,7 @@
     photoimporter.py
     ---------------------
     Date                 : November 2014
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'November 2014'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -29,11 +29,17 @@ import os
 
 import exifread
 
-from PyQt4.QtCore import pyqtSignal, QObject, QVariant, QFileInfo
+from qgis.PyQt.QtCore import pyqtSignal, QObject, QVariant, QFileInfo
 
-from qgis.core import (
-    QGis, QgsFeature, QgsFields, QgsField, QgsGeometry, QgsPoint,
-    QgsVectorLayer, QgsVectorFileWriter, QgsCoordinateReferenceSystem)
+from qgis.core import (QGis,
+                       QgsFeature,
+                       QgsFields,
+                       QgsField,
+                       QgsGeometry,
+                       QgsPoint,
+                       QgsVectorLayer,
+                       QgsVectorFileWriter,
+                       QgsCoordinateReferenceSystem)
 
 
 class PhotoImporter(QObject):
@@ -176,7 +182,7 @@ class PhotoImporter(QObject):
             lat = round(float(tags['GPS GPSLatitude'].values), 7)
             return lon, lat
 
-        # Sometimes tags present by filled with zeros
+        # Sometimes tags present but filled with zeros
         if tags['GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
             return None, None
 
