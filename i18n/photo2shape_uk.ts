@@ -15,28 +15,33 @@
     <message>
         <location filename="gui/aboutdialog.py" line="80"/>
         <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;NOTE: plugin requires 3rd party Python package exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;ПРИМІТКА: для роботи плаґіна потрібен модуль Python exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;ПРИМІТКА: для роботи плаґіна потрібен модуль Python exifread &gt;= 2.0.0&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape&quot;&gt;http://hub.qgis.org/projects/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;http://hub.qgis.org/projects/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="gui/aboutdialog.py" line="56"/>
+        <location filename="../gui/aboutdialog.py" line="56"/>
         <source>Version: {}</source>
         <translation>Версія: {}</translation>
+    </message>
+    <message>
+        <location filename="../gui/aboutdialog.py" line="80"/>
+        <source>&lt;p&gt;Create point shapefile from a set of geotagged photos. Inspired by ImagesToShape plugin from Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Developers&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Homepage&lt;/strong&gt;: &lt;a href=&quot;https://github.com/alexbruy/photo2shape&quot;&gt;https://github.com/alexbruy/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Please report bugs at &lt;a href=&quot;https://github.com/alexbruy/photo2shape/issues&quot;&gt;bugtracker&lt;/a&gt;.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Створює точковий shape-файл з набору геотегованих фотографій. На розробку надихнув плагін ImagesToShape за авторством Tim Sutton.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Розробники&lt;/strong&gt;: Alexander Bruy&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Домашня сторінка&lt;/strong&gt;: &lt;a href=&quot;https://github.com/alexbruy/photo2shape&quot;&gt;https://github.com/alexbruy/photo2shape&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Про помилки повідомляйте у &lt;a href=&quot;https://github.com/alexbruy/photo2shape/issues&quot;&gt;багтрекер&lt;/a&gt;.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="14"/>
+        <location filename="../ui/aboutdialogbase.ui" line="14"/>
         <source>About Photo2Shape</source>
         <translation>Про Photo2Shape</translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="44"/>
+        <location filename="../ui/aboutdialogbase.ui" line="44"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="30"/>
+        <location filename="../ui/aboutdialogbase.ui" line="30"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -49,7 +54,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Photo2Shape&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="ui/aboutdialogbase.ui" line="67"/>
+        <location filename="../ui/aboutdialogbase.ui" line="67"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -62,37 +67,37 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Sans Serif&apos;; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="14"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="14"/>
         <source>Photo2Shape</source>
         <translation>Photo2Shape</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="34"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="34"/>
         <source>Browse...</source>
         <translation>Огляд...</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="27"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="27"/>
         <source>Output shapefile</source>
         <translation>Вихідний shape-файл</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="51"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="51"/>
         <source>Directory with images</source>
         <translation>Каталог з фото</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="61"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="61"/>
         <source>Add result to canvas</source>
         <translation>Завантажити результат у QGIS</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="68"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="68"/>
         <source>Recurse subdirectories</source>
         <translation>Рекурсивний обхід каталогів</translation>
     </message>
     <message>
-        <location filename="ui/photo2shapedialogbase.ui" line="75"/>
+        <location filename="../ui/photo2shapedialogbase.ui" line="75"/>
         <source>Append to existing file</source>
         <translation>Дописати в існуючий файл</translation>
     </message>
@@ -132,59 +137,74 @@ Plugin will not be enabled.</source>
 <context>
     <name>Photo2ShapeDialog</name>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="98"/>
+        <location filename="../gui/photo2shapedialog.py" line="98"/>
         <source>ESRI Shapefiles (*.shp *.SHP)</source>
         <translation>Shape-файли ESRI (*.shp *.SHP)</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="87"/>
+        <location filename="../gui/photo2shapedialog.py" line="87"/>
         <source>Select directory</source>
         <translation>Виберіть каталог</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="101"/>
+        <location filename="../gui/photo2shapedialog.py" line="101"/>
         <source>Save file</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="127"/>
+        <location filename="../gui/photo2shapedialog.py" line="127"/>
         <source>Path not set</source>
         <translation>Шлях не задано</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="127"/>
+        <location filename="../gui/photo2shapedialog.py" line="127"/>
         <source>Path to photos is not set. Please specify directory with photos and try again.</source>
         <translation>Каталог зображень не задано. Будь ласка задайте каталог зображень та спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="135"/>
+        <location filename="../gui/photo2shapedialog.py" line="135"/>
         <source>Output file is not set</source>
         <translation>Вихідний файл не задано</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="135"/>
+        <location filename="../gui/photo2shapedialog.py" line="135"/>
         <source>Output file name is missing. Please specify correct output file and try again.</source>
         <translation>Не вказано ім&apos;я вихідного файлу. Будь ласка вкажіть ім&apos;я вихідного файлу та спробуйте ще раз.</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="163"/>
+        <location filename="../gui/photo2shapedialog.py" line="177"/>
         <source>Import completed</source>
         <translation>Імпорт завершено</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="180"/>
+        <location filename="../gui/photo2shapedialog.py" line="194"/>
         <source>Cannot load output shapefile</source>
         <translation>Не вдалось завантажити вихідний shape-файл</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="163"/>
+        <location filename="../gui/photo2shapedialog.py" line="177"/>
         <source>Shapefile from photos sucessfully created</source>
         <translation>Shape-файл створено успішно</translation>
     </message>
     <message>
-        <location filename="gui/photo2shapedialog.py" line="180"/>
+        <location filename="../gui/photo2shapedialog.py" line="194"/>
         <source>No output</source>
         <translation>Відсутній вихідний файл</translation>
+    </message>
+    <message>
+        <location filename="../gui/photo2shapedialog.py" line="147"/>
+        <source>Appending is not possible</source>
+        <translation>Дописування неможливе</translation>
+    </message>
+    <message>
+        <location filename="../gui/photo2shapedialog.py" line="147"/>
+        <source>Output file is a new file and can not be used in &quot;append&quot; mode. Either specify existing file or uncheck corresponding checkbox.</source>
+        <translation>Вихідний файл не існує та не може бути викоританий у режимі &quot;оновлення&quot;. Або вкажіть існуючий файл або відключіть відповідну настройку.</translation>
+    </message>
+    <message>
+        <location filename="../gui/photo2shapedialog.py" line="172"/>
+        <source>Import error</source>
+        <translation>Помилка імпорту</translation>
     </message>
 </context>
 <context>
@@ -193,26 +213,26 @@ Plugin will not be enabled.</source>
         <location filename="photo2shape_plugin.py" line="66"/>
         <source>QGIS {} detected.
 This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabled.</source>
-        <translation>Знайдено QGIS {}.
+        <translation type="obsolete">Знайдено QGIS {}.
 Ця версія Photo2Shape потребує QGIS 2.0 або новішу. Плагін не буде активовано.</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="99"/>
+        <location filename="../photo2shape_plugin.py" line="87"/>
         <source>Photo2Shape</source>
         <translation>Photo2Shape</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="76"/>
+        <location filename="../photo2shape_plugin.py" line="64"/>
         <source>Create a point shapefile from geotagged images</source>
         <translation>Створити точковий shape-файл з набору геотегованих зображень</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="80"/>
+        <location filename="../photo2shape_plugin.py" line="68"/>
         <source>About Photo2Shape...</source>
         <translation>Про Photo2Shape...</translation>
     </message>
     <message>
-        <location filename="photo2shape_plugin.py" line="84"/>
+        <location filename="../photo2shape_plugin.py" line="72"/>
         <source>About Photo2Shape</source>
         <translation>Про Photo2Shape</translation>
     </message>
@@ -220,12 +240,12 @@ This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabl
 <context>
     <name>PhotoImporter</name>
     <message>
-        <location filename="photoimporter.py" line="77"/>
+        <location filename="../photoimporter.py" line="83"/>
         <source>Unable to open or create layer.</source>
         <translation>Не вдалось створити або відкрити шар.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="91"/>
+        <location filename="../photoimporter.py" line="97"/>
         <source>No images found in directory.</source>
         <translation>У каталозі відсутні зображення.</translation>
     </message>
@@ -255,17 +275,17 @@ This version of Photo2Shape requires at least QGIS 2.0. Plugin will not be enabl
         <translation type="obsolete">Знайдено exifread %s, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="66"/>
+        <location filename="../photoimporter.py" line="72"/>
         <source>Found exifread {}, but plugin requires exifread 1.x or &gt;= 2.0.1.</source>
         <translation>Знайдено exifread {}, але плаґін працює лише з exifread 1.x або &gt;=2.0.1.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="103"/>
+        <location filename="../photoimporter.py" line="109"/>
         <source>Skipping file {}: there are no GPS tags in it.</source>
         <translation>Файл {} пропущено: відсутні теги GPS.</translation>
     </message>
     <message>
-        <location filename="photoimporter.py" line="112"/>
+        <location filename="../photoimporter.py" line="118"/>
         <source>Skipping file {}: there are no GPS fix data.</source>
         <translation>Файл {} пропущено: відсутні координати GPS.</translation>
     </message>

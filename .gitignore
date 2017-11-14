@@ -2,6 +2,5 @@
 *.*~
 *~
 *.diff
+*.qm
 *.log*
-resources_rc.py
-ui/ui_*.py

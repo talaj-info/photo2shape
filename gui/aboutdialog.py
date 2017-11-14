@@ -5,7 +5,7 @@
     aboutdialog.py
     ---------------------
     Date                 : July 2013
-    Copyright            : (C) 2013-2015 by Alexander Bruy
+    Copyright            : (C) 2013-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'July 2013'
-__copyright__ = '(C) 2013-2015, Alexander Bruy'
+__copyright__ = '(C) 2013-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -29,10 +29,10 @@ __revision__ = '$Format:%H$'
 import os
 import ConfigParser
 
-from PyQt4 import uic
-from PyQt4.QtCore import QUrl, QSettings, QLocale
-from PyQt4.QtGui import (QDialogButtonBox, QTextDocument, QPixmap, QDialog,
-    QDesktopServices)
+from qgis.PyQt import uic
+from qgis.PyQt.QtGui import QTextDocument, QPixmap, QDesktopServices
+from qgis.PyQt.QtCore import QUrl, QSettings, QLocale
+from qgis.PyQt.QtWidgets import QDialogButtonBox, QDialog
 
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
@@ -71,21 +71,19 @@ class AboutDialog(BASE, WIDGET):
 
         if locale in ['uk']:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
+                QUrl('https://github.com/alexbruy/photo2shape'))
         else:
             QDesktopServices.openUrl(
-                QUrl('http://hub.qgis.org/projects/photo2shape/wiki'))
+                QUrl('https://github.com/alexbruy/photo2shape'))
 
     def getAboutText(self):
         return self.tr(
             '<p>Create point shapefile from a set of geotagged photos. '
             'Inspired by ImagesToShape plugin from Tim Sutton.</p>'
-            '<p>NOTE: plugin requires 3rd party Python package '
-            'exifread >= 2.0.0</p>'
             '<p><strong>Developers</strong>: Alexander Bruy</p>'
             '<p><strong>Homepage</strong>: '
-            '<a href="http://hub.qgis.org/projects/photo2shape">'
-            'http://hub.qgis.org/projects/photo2shape</a></p>'
+            '<a href="https://github.com/alexbruy/photo2shape">'
+            'https://github.com/alexbruy/photo2shape</a></p>'
             '<p>Please report bugs at '
-            '<a href="http://hub.qgis.org/projects/photo2shape/issues">'
+            '<a href="https://github.com/alexbruy/photo2shape/issues">'
             'bugtracker</a>.</p>')

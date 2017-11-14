@@ -5,7 +5,7 @@
     photo2shapedialog.py
     ---------------------
     Date                 : February 2010
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'February 2010'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
@@ -27,15 +27,14 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4 import uic
-from PyQt4.QtCore import QSettings, QThread, QFileInfo
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QFileDialog
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import QSettings, QThread, QFileInfo
+from qgis.PyQt.QtWidgets import QDialog, QDialogButtonBox, QFileDialog
 
 from qgis.core import QgsVectorLayer, QgsMapLayerRegistry, QgsMessageLog
 from qgis.gui import QgsEncodingFileDialog
 
 from photo2shape.photoimporter import PhotoImporter
-
 
 pluginPath = os.path.split(os.path.dirname(__file__))[0]
 WIDGET, BASE = uic.loadUiType(
@@ -71,23 +70,11 @@ class Photo2ShapeDialog(BASE, WIDGET):
         self.thread.started.connect(self.importer.importPhotos)
 
         self.encoding = self.settings.value('encoding', 'System')
-
         self.manageGui()
 
     def manageGui(self):
-        lastDir = self.settings.value('lastPhotosDir', '')
-        self.lePhotosPath.setText(lastDir)
-        lastShapeFile = self.settings.value('lastShapeFile', '')
-        self.leOutputShape.setText(lastShapeFile)
         self.chkRecurse.setChecked(self.settings.value('recurse', True, bool))
-
-        if os.path.isfile(lastShapeFile):
-            self.chkAppend.setChecked(self.settings.value('append', True, bool))
-            self.chkAppend.setEnabled(True)
-        else:
-            self.chkAppend.setChecked(False)
-            self.chkAppend.setEnabled(False)
-
+        self.chkAppend.setChecked(self.settings.value('append', True, bool))
         self.chkLoadLayer.setChecked(
             self.settings.value('loadLayer', True, bool))
 
@@ -102,38 +89,31 @@ class Photo2ShapeDialog(BASE, WIDGET):
 
         if dirName == '':
             return
-        else:
-            dirName = os.path.abspath(dirName)
 
         self.lePhotosPath.setText(dirName)
-        self.settings.setValue('lastPhotosDir', dirName)
+        self.settings.setValue('lastPhotosDir', os.path.dirname(dirName))
 
     def selectFile(self):
-        lastShapeFile = self.settings.value('lastShapeFile', '')
+        lastDir = self.settings.value('lastShapeDir', '.')
         shpFilter = self.tr('ESRI Shapefiles (*.shp *.SHP)')
         self.encoding = self.settings.value('encoding', 'System')
 
         fileDialog = QgsEncodingFileDialog(
-            self, self.tr('Save file'), lastShapeFile, shpFilter,
-            self.encoding)
+            self, self.tr('Save file'), lastDir, shpFilter, self.encoding)
 
         fileDialog.setDefaultSuffix('shp')
         fileDialog.setFileMode(QFileDialog.AnyFile)
         fileDialog.setAcceptMode(QFileDialog.AcceptSave)
-        fileDialog.setConfirmOverwrite(False)
+        fileDialog.setConfirmOverwrite(True)
 
         if fileDialog.exec_():
             fileName = fileDialog.selectedFiles()[0]
-            fileName = os.path.abspath(fileName)
             self.encoding = fileDialog.encoding()
+
             self.leOutputShape.setText(fileName)
-            self.settings.setValue('lastShapeFile', fileName)
+            self.settings.setValue('lastShapeDir',
+                QFileInfo(fileName).absoluteDir().absolutePath())
             self.settings.setValue('encoding', self.encoding)
-            if os.path.isfile(fileName):
-                self.chkAppend.setEnabled(True)
-            else:
-                self.chkAppend.setChecked(False)
-                self.chkAppend.setEnabled(False)
 
     def reject(self):
         self._saveSettings()
@@ -158,6 +138,19 @@ class Photo2ShapeDialog(BASE, WIDGET):
                         'output file and try again.'))
             return
 
+        # make sure output file always has correct suffix
+        if not fileName.lower().endswith('.shp'):
+            fileName += '.shp'
+            self.leOutputShape.setText(fileName)
+
+        if self.chkAppend.isChecked() and not os.path.isfile(fileName):
+            self.iface.messageBar().pushWarning(
+                self.tr('Appending is not possible'),
+                self.tr('Output file is a new file and can not be used '
+                        'in "append" mode. Either specify existing file '
+                        'or uncheck corresponding checkbox.'))
+            return
+
         self.importer.setPhotosDirectory(dirName)
         self.importer.setOutputPath(fileName)
         self.importer.setEncoding(self.encoding)
@@ -173,14 +166,11 @@ class Photo2ShapeDialog(BASE, WIDGET):
         self.progressBar.setValue(value)
 
     def logMessage(self, message, level=QgsMessageLog.INFO):
-        self.iface.messageBar().pushInfo(
-            self.tr('Info'), message)
         QgsMessageLog.logMessage(message, 'Photo2Shape', level)
 
     def importCanceled(self, message):
-        self.iface.messageBar().pushWarning(
-            self.tr('Import cancelled'),
-            message)
+        self.iface.messageBar().pushWarning(self.tr('Import error'),
+                                            message)
         self._restoreGui()
 
     def importCompleted(self):

@@ -1,3 +1,4 @@
+PLUGIN_NAME=photo2shape
 LANG_PATH=i18n
 LANG_SOURCES=$(wildcard $(LANG_PATH)/*.ts)
 LANG_FILES=$(patsubst $(LANG_PATH)/%.ts, $(LANG_PATH)/%.qm, $(LANG_SOURCES))
@@ -5,7 +6,7 @@ LANG_FILES=$(patsubst $(LANG_PATH)/%.ts, $(LANG_PATH)/%.qm, $(LANG_SOURCES))
 PRO_PATH=.
 PRO_FILES=$(wildcard $(PRO_PATH)/*.pro)
 
-ALL_FILES= ${LANG_FILES}
+ALL_FILES=${LANG_FILES}
 
 all: $(ALL_FILES)
 
@@ -27,11 +28,10 @@ pep8:
 clean:
 	rm -f $(ALL_FILES)
 	find -name "*.pyc" -exec rm -f {} \;
-	rm -f *.zip
+	rm -f ../$(PLUGIN_NAME).zip
 
 package: clean ts all
-	cd .. && rm -f *.zip && zip -r photo2shape.zip photo2shape -x \*.pyc \*.ts \*.pro \*~ \*.git\* \*Makefile*
-	mv ../photo2shape.zip .
+	cd .. && rm -f *.zip && zip -r $(PLUGIN_NAME).zip $(PLUGIN_NAME) -x \*.pyc \*.ts \*.pro \*~ \*.git\* \*Makefile*
 
 upload: package
-	plugin_uploader.py photo2shape.zip
+	plugin_uploader.py ../$(PLUGIN_NAME).zip

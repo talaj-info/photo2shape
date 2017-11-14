@@ -5,7 +5,7 @@
     photoimporter.py
     ---------------------
     Date                 : November 2014
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,22 +19,27 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'November 2014'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
 __revision__ = '$Format:%H$'
 
 import os
-import time
 
 import exifread
 
-from PyQt4.QtCore import pyqtSignal, QObject, QVariant, QFileInfo
+from qgis.PyQt.QtCore import pyqtSignal, QObject, QVariant, QFileInfo
 
-from qgis.core import (
-    QGis, QgsFeature, QgsFields, QgsField, QgsGeometry, QgsPoint,
-    QgsVectorLayer, QgsVectorFileWriter, QgsCoordinateReferenceSystem)
+from qgis.core import (QGis,
+                       QgsFeature,
+                       QgsFields,
+                       QgsField,
+                       QgsGeometry,
+                       QgsPoint,
+                       QgsVectorLayer,
+                       QgsVectorFileWriter,
+                       QgsCoordinateReferenceSystem)
 
 
 class PhotoImporter(QObject):
@@ -99,23 +104,29 @@ class PhotoImporter(QObject):
         for count, fName in enumerate(photos):
             with open(fName, 'rb') as imgFile:
                 tags = exifread.process_file(imgFile, details=False)
+
             if not tags.viewkeys() & {'GPS GPSLongitude', 'GPS GPSLatitude'}:
-                s = u'Skipping file "{}": there are no GPS tags in it.'.format(fName)
-                self.importMessage.emit(s)
+                self.importMessage.emit(
+                    self.tr('Skipping file {}: '
+                            'there are no GPS tags in it.'.format(fName)))
                 self.photoProcessed.emit(int(count * total))
                 continue
+
             # Start processing tags
             longitude, latitude = self._extractCoordinates(tags)
             if longitude is None:
-                s = u'Skipping file "{}": there are no GPS fix data.'.format(fName)
-                self.importMessage.emit(s)
+                self.importMessage.emit(
+                    self.tr('Skipping file {}: '
+                            'there are no GPS fix data.'.format(fName)))
                 self.photoProcessed.emit(int(count * total))
                 continue
+
             altitude = self._extractAltitude(tags)
             north, azimuth = self._extractDirection(tags)
             gpsDate = self._extracrGPSDateTime(tags)
             imgDate = self._extractImageDateTime(tags)
             del tags
+
             # Write feature to layer
             ft.setGeometry(
                 QgsGeometry.fromPoint(QgsPoint(longitude, latitude)))
@@ -154,12 +165,11 @@ class PhotoImporter(QObject):
         crs = QgsCoordinateReferenceSystem(4326)
         writer = QgsVectorFileWriter(
             self.shapePath, self.encoding, fields, QGis.WKBPoint, crs)
-        if writer.hasError() != QgsVectorFileWriter.NoError:
-            return None
         del writer
 
         layer = QgsVectorLayer(
             self.shapePath, QFileInfo(self.shapePath).baseName(), 'ogr')
+
         return layer
 
     def _extractCoordinates(self, tags):
@@ -172,7 +182,7 @@ class PhotoImporter(QObject):
             lat = round(float(tags['GPS GPSLatitude'].values), 7)
             return lon, lat
 
-        # Sometimes tags present by filled with zeros
+        # Sometimes tags present but filled with zeros
         if tags['GPS GPSLongitude'].printable == '[0/0, 0/0, 0/0]':
             return None, None
 
@@ -242,7 +252,7 @@ class PhotoImporter(QObject):
             return None, None
 
         # Sometimes tag present by filled with zeros
-        if tags['GPS GPSImgDirection'].printable == '[0/0, 0/0, 0/0]':
+        if tags['GPS GPSImgDirection'].printable in ['[0/0, 0/0, 0/0]', '0/0']:
             return None, None
 
         # Reference will be either "T" or "M"
@@ -277,6 +287,8 @@ class PhotoImporter(QObject):
     def _extractImageDateTime(self, tags):
         if 'Image DateTime' in tags:
             s = tags['Image DateTime'].values
-            splitted = s.split()
-            return splitted[0].replace(u':', u'-') + u' ' + splitted[1]
-        return None
+            p = list(s.partition(' '))
+            p[0] = p[0].replace(u':', u'-')
+            return u''.join(p)
+        else:
+            return None
