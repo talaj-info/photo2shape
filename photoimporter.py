@@ -287,3 +287,5 @@ class PhotoImporter(QObject):
     def _extractImageDateTime(self, tags):
         if 'Image DateTime' in tags:
             return tags['Image DateTime'].values
+
+        return None

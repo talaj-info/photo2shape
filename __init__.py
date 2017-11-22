@@ -5,7 +5,7 @@
     __init__.py
     ---------------------
     Date                 : February 2010
-    Copyright            : (C) 2010-2015 by Alexander Bruy
+    Copyright            : (C) 2010-2017 by Alexander Bruy
     Email                : alexander dot bruy at gmail dot com
 ***************************************************************************
 *                                                                         *
@@ -19,7 +19,7 @@
 
 __author__ = 'Alexander Bruy'
 __date__ = 'February 2010'
-__copyright__ = '(C) 2010-2015, Alexander Bruy'
+__copyright__ = '(C) 2010-2017, Alexander Bruy'
 
 # This will get replaced with a git SHA1 when you do a git archive
 
