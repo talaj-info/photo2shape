@@ -276,7 +276,7 @@ class PhotoImporter(QObject):
                 return tags['GPS GPSTimeStamp'].values
             else:
                 v = tags['GPS GPSTimeStamp'].values
-                imgTime = '{:0>2}:{:0>2}:{:0>2}'.format(v[0], v[1], v[2])
+                imgTime = '{:0>2}-{:0>2}-{:0>2}'.format(v[0], v[1], v[2])
                 if imgDate is None:
                     return imgTime
                 else:
@@ -286,9 +286,4 @@ class PhotoImporter(QObject):
 
     def _extractImageDateTime(self, tags):
         if 'Image DateTime' in tags:
-            s = tags['Image DateTime'].values
-            p = list(s.partition(' '))
-            p[0] = p[0].replace(u':', u'-')
-            return u''.join(p)
-        else:
-            return None
+            return tags['Image DateTime'].values
