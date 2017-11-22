@@ -286,6 +286,9 @@ class PhotoImporter(QObject):
 
     def _extractImageDateTime(self, tags):
         if 'Image DateTime' in tags:
-            return tags['Image DateTime'].values
-
-        return None
+            s = tags['Image DateTime'].values
+            p = list(s.partition(' '))
+            p[0] = p[0].replace(u':', u'-')
+            return u''.join(p)
+        else:
+            return None
