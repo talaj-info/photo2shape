@@ -7,3 +7,6 @@ Requires exifread Python package (1.x or >=2.0.1).
 NOTE: backward compatibility in tag names between exifread 1.x
 and exifread 2.0.0 was broken. This was fixed by exifread 2.0.1.
 If you have exifread 2.0.0 please use Photo2shape 0.4.0
+
+Fork of the deleted repo: https://github.com/alexbruy/photo2shape
+Archived as I migrate to Codeberg because of GitHub 2FA enforcement -- SzieberthAdam
